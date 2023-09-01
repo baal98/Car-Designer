@@ -1,0 +1,33 @@
+﻿@using AdvertisingAgency.Data.Data.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    ViewData["BodyClass"] = "canvas-body";
+}
+
+<style>
+    .canvas-body {
+        background-color: navajowhite;
+    }
+
+    .canvas-body nav.navbar {
+        background-color: cornflowerblue;
+    }
+</style>
+
+<ul class="nav nav-pills flex-column">
+    <!-- Add your new pages here -->
+    <li class="nav-item"><a class="nav-link @ManageNavPages.FriendlyNameNavClass(ViewContext)" id="friendly-name" asp-page="./FriendlyName">Friendly Name</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonImageModelNavClass(ViewContext)" id="image-url" asp-page="./PersonImage">Profile Picture</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.AddressNavClass(ViewContext)" id="address" asp-page="./Address">Address</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Phone</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+    }
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+</ul>

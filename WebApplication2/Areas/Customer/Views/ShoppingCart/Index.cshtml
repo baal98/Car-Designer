@@ -1,0 +1,127 @@
+﻿@using NuGet.Protocol
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Reflection
+@model shoppingCartVM
+@{
+    ViewData["Title"] = "Shopping Cart";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<style>
+    .canvas-body nav.navbar {
+        background-color: #1A56E7;
+        height: 60px;
+    }
+    #myContainer {
+        width: 100%;
+        overflow: auto;
+    }
+    .card:hover {
+        transform: none !important;
+    }
+</style>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/shopping-cart-Background.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<hr />
+<hr />
+<div class="container" id="myContainer" style="display: flex; align-items: center;">
+    <div class="card" style="width: 700px">
+        <div class="card-header bg-dark text-light ml-0">
+            <div class="row">
+                <div class="col-6  pt-2">
+                    <i class="fa fa-shopping-cart"></i> &nbsp;
+                    Shopping Cart
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-area="" asp-controller="CanvasMvc" asp-action="Index" class="btn btn-outline-info btn-sm" style="color: #ecb22f;">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            @foreach (var item in Model.ShoppingCartItems)
+            {
+                <div class="row">
+                    @if (item != null && item.Thumbnail != null)
+                    {
+                        <div class="d-none d-lg-block col-lg-2 text-center py-2">
+                            <img src="@item.Thumbnail" class="rounded" width="100" />
+                        </div>
+                    }
+                    <div class="col-12 col-lg-5 pt-md-3">
+                        <h5><strong>@item.Product.Title</strong></h5>
+                        <p><small>@Html.Encode(item.Product.Description)</small></p>
+                    </div>
+                    <div class="col-12  col-lg-5 text-center row">
+                        <div class="col-4 text-md-right pt-4">
+                            <h6>
+                                <strong>
+                                    @item.Product.Price.ToString("c")
+                                    <span class="text-muted">&nbsp;x&nbsp;</span>@item.Quantity
+                                </strong>
+                            </h6>
+                        </div>
+
+                        <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
+                            <form asp-area="Customer" asp-controller="ShoppingCart" asp-action="Plus" method="post">
+                                <input type="hidden" name="cartItemId" value="@item.Id">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-plus-square"></i>
+                                </button>
+                            </form>
+                        </div>
+
+
+
+                        <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
+                            <form asp-area="Customer" asp-controller="ShoppingCart" asp-action="Minus" method="post">
+                                <input type="hidden" name="cartItemId" value="@item.Id">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="bi bi-dash-square"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="col-2 col-sm-4 col-lg-2 text-right pt-2">
+                            <form asp-area="Customer" asp-controller="ShoppingCart" asp-action="Remove">
+                                <input type="hidden" name="cartItemId" value="@item.Id">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+            }
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <span class="text-info"> Total (USD)</span>
+                            <strong class="text-info">@Model.ShoppingCartTotal.ToString("c")</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <div class="card-footer row">
+                <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6 ">
+                    <form asp-area="Customer" asp-controller="ShoppingCart" asp-action="SummaryPost" method="post">
+                        @foreach (var item in Model.ShoppingCartItems)
+                        {
+                            <input type="hidden" name="canvasId" value="@item.Product.CanvasId" />
+                        }
+                        <button type="submit" class="btn btn-success form-control">Summary</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,258 @@
+﻿@inject UserManager<ApplicationUser> _userManager
+@{
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+
+@{
+    ViewData["Title"] = "All Users";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/UsersCss/Styles.css">
+<link rel="stylesheet" href="~/UsersCss/AllUsers.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/ChatBackground1.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1 class="panel-title">All Users</h1>
+
+<div class="table-wrapper">
+    <table class="table table-bordered thick-bordered col-12">
+        <thead>
+            <tr>
+                <th class="text-center">Personal Info</th>
+                <th class="text-center">Get Products Info</th>
+                <th class="text-center">Orders</th>
+                <th class="text-center">Role</th>
+                <th class="text-center">Action</th>
+                <th class="text-center">Attention</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @user.Email
+                        @if (user != null && !string.IsNullOrEmpty(user.ImageUrl))
+                        {
+                            <img src="@user.ImageUrl" alt="User Photo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+                        }
+                        <button type="button" class="btn-light load-user-info" data-user-id="@user.UserId">User Info</button>
+                    </td>
+                    <td>
+                        <form asp-controller="Users" asp-action="GetUserProducts" method="get">
+                            <input type="hidden" name="id" value="@user.UserId" />
+                            <input class="btn btn-success" style="color: bisque" type="submit" value="Get All Products" />
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Users" asp-action="UserOrders" method="get">
+                            <input type="hidden" name="id" value="@user.UserId" />
+                            <input class="btn btn-block" style="color: darkblue" type="submit" value="Get All Orders" />
+                        </form>
+                    </td>
+                    <td>
+                        @if (await _userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            <p>Admin</p>
+                        }
+                        else
+                        {
+                            <p>Customer</p>
+                        }
+                    </td>
+                    <td>
+                        @if (!await _userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            <form action="/users/promote" method="post">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <input class="btn btn-primary" type="submit" value="Promote to Admin" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form action="/users/demote" method="post">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <input class="btn btn-danger" type="submit" value="Demote from Admin" />
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <div style="display: flex; align-items: center;">
+                            <span class="blinking" style="margin-right: 10px; color: red; font-size: 40px;">&#9888;</span>
+                            <button class="btn btn-danger" style="color: black" onclick="deleteUser('@user.UserId')">Delete User</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <!-- Add to UserInfo Modal -->
+    @foreach (var user in Model)
+    {
+        <div class="modal fade rounded-modal" id="userInfoModal-@user.UserId" tabindex="-1" role="dialog" aria-labelledby="userInfoModalLabel-@user.UserId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="userInfoModalLabel-@user.UserId">
+                            Personal Info @(user.FriendlyName != null ? "of " + user.FriendlyName : "")
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        @if (user != null && !string.IsNullOrEmpty(user.ImageUrl))
+                        {
+                            <img src="@user.ImageUrl" alt="User Photo" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover;" />
+                        }
+                        <table class="table table-bordered thick-bordered col-12 user-table">
+                            <tbody>
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>@(user != null && user.FriendlyName != null ? user.FriendlyName : "Not provided")</td>
+                                </tr>
+                                <tr>
+                                    <th>E-mail:</th>
+                                    <td>@(user != null && user.Email != null ? user.Email : "Not provided")</td>
+                                </tr>
+                                <tr>
+                                    <th>Address:</th>
+                                    <td>
+                                        @(user != null && user.Address != null && user.City != null && user.Country != null ? user.Address.BuildingNumber + ", "
+                                            + user.Address.Street + " " + "str., "
+                                            + user.City.Name + ", "
+                                            + user.Country.Name : "Not provided")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number:</th>
+                                    <td>@(user != null ? user?.PhoneNumber : "Not provided")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Ooops!',
+            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <p>@TempData["ErrorMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}
+
+
+<script>
+    function deleteUser(userId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            html: '<img src="@Url.Content("~/Images/ThinkItFace.png")" /> <br/> <p>You won\'t be able to revert this!</p>',
+            icon: null,
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true,
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/users/delete',
+                    type: 'POST',
+                    data: { id: userId },
+                    success: function () {
+                        Swal.fire({
+                            title: 'Deleted!',
+                            html: '<img src="@Url.Content("~/Images/CryingFace.png")" /> <br/> <p>The user has been deleted!</p>',
+                            confirmButtonText: 'Okay',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function () {
+                        Swal.fire({
+                            title: 'Error!',
+                            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <br/> <p>An error occurred while deleting the user.</p>',
+                            icon: 'error',
+                            confirmButtonText: 'Okay',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+    $(document).on('click', '.load-user-info', function() {
+        var userId = $(this).data('user-id');
+
+        $.ajax({
+            url: '/users/getuserinfo',
+            type: 'POST',
+            data: { id: userId },
+            success: function(user) {
+                // Fill the modal with the user data
+                $('#userInfoModal-' + userId).find('.modal-body .user-table tbody').html(`
+            <tr>
+                <th>Name:</th>
+                <td>${user.friendlyName}</td>
+            </tr>
+            <tr>
+                <th>E-mail:</th>
+                <td>${user.email}</td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td>${user.address}</td>
+            </tr>
+            <tr>
+                <th>Phone Number:</th>
+                <td>${user.phoneNumber}</td>
+            </tr>
+        `);
+
+                // Show the modal
+                $('#userInfoModal-' + userId).modal('show');
+            }
+        });
+    });
+</script>

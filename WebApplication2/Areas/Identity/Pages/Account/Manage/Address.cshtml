@@ -1,0 +1,78 @@
+﻿@page
+@model AddressModel
+@{
+    ViewData["Title"] = "Address";
+    ViewData["ActivePage"] = ManageNavPages.Address;
+    ViewData["BodyClass"] = "canvas-body";
+}
+
+@{
+    var hasAddress = !string.IsNullOrEmpty(Model.Input.Street) || !string.IsNullOrEmpty(Model.Input.BuildingNumber) || 
+                     !string.IsNullOrEmpty(Model.Input.CityName) || !string.IsNullOrEmpty(Model.Input.CountryName);
+}
+
+
+<style>
+    .canvas-body {
+        background-color: navajowhite;
+    }
+
+        .canvas-body nav.navbar {
+            background-color: cornflowerblue;
+        }
+</style>
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Address Street -->
+            <div class="form-floating">
+                <input asp-for="Input.Street" class="form-control" required="true" />
+                <label asp-for="Input.Street" class="form-label"></label>
+                <span asp-validation-for="Input.Street" class="text-danger"></span>
+            </div>
+
+            <!-- Building Number -->
+            <div class="form-floating">
+                <input asp-for="Input.BuildingNumber" class="form-control" required="true" />
+                <label asp-for="Input.BuildingNumber" class="form-label"></label>
+                <span asp-validation-for="Input.BuildingNumber" class="text-danger"></span>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="form-floating">
+                <input asp-for="Input.AdditionalInfo" class="form-control" required="true" />
+                <label asp-for="Input.AdditionalInfo" class="form-label"></label>
+                <span asp-validation-for="Input.AdditionalInfo" class="text-danger"></span>
+            </div>
+
+            <!-- Country -->
+            <div class="form-floating">
+                <input asp-for="Input.CountryName" class="form-control" required="true" />
+                <label asp-for="Input.CountryName" class="form-label"></label>
+                <span asp-validation-for="Input.CountryName" class="text-danger"></span>
+            </div>
+
+            <!-- City -->
+            <div class="form-floating">
+                <input asp-for="Input.CityName" class="form-control" required="true" />
+                <label asp-for="Input.CityName" class="form-label"></label>
+                <span asp-validation-for="Input.CityName" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            @if (hasAddress)
+            {
+                <button id="delete-address-button" type="submit" formaction="/Identity/Account/Manage/Address?handler=DeleteAddress" class="w-100 btn btn-lg btn-danger" onclick="return confirm('Are you sure you want to delete your address?');">Delete Address</button>
+            }
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

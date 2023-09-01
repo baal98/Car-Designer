@@ -1,0 +1,91 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-WebApplication2-d287ed29-b3ed-40ba-8308-d4b7798a63c5</UserSecretsId>
+	  <ServerGarbageCollection>false</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Images\Videos\**" />
+    <Content Remove="wwwroot\Images\Videos\**" />
+    <EmbeddedResource Remove="wwwroot\Images\Videos\**" />
+    <None Remove="wwwroot\Images\Videos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.6.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.16.0" />
+    <PackageReference Include="Azure.Storage.Files.Shares" Version="12.1.0" />
+    <PackageReference Include="Azure.Storage.Queues" Version="12.2.0" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="HtmlSanitizer" Version="8.0.645" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.16" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdvertisingAgency.Services.Data.Models\AdvertisingAgency.Services.Data.Models.csproj" />
+    <ProjectReference Include="..\AdvertisingAgency.Services\AdvertisingAgency.Services.csproj" />
+    <ProjectReference Include="..\AdvertisingAgency.Utility\AdvertisingAgency.Utility.csproj" />
+    <ProjectReference Include="..\AdvertisingAgency.Web.ViewModels\AdvertisingAgency.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\DataAccess\AdvertisingAgency.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Images\Gallery\Funny\Funny1.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny10.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny11.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny12.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny13.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny14.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny15.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny2.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny3.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny4.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny5.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny6.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny7.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny8.svg" />
+    <None Include="wwwroot\Images\Gallery\Funny\Funny9.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\10.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad1.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad11.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad12.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad13.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad14.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad15.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad2.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad3.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad4.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad5.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad6.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad7.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad8.svg" />
+    <None Include="wwwroot\Images\Gallery\Offroad\Offroad9.svg" />
+  </ItemGroup>
+
+</Project>

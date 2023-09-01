@@ -1,0 +1,99 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    const userId = '@ViewBag.UserId';
+
+    function submitProjectName() {
+        const projectNameInput = document.querySelector('#create-project-form input[name="Name"]');
+        const projectDescriptionInput = document.querySelector('#create-project-form textarea[name="Description"]');
+        const projectName = projectNameInput.value;
+        const projectDescription = projectDescriptionInput.value;
+        
+        if (projectName.length === 0) {
+            Swal.fire({
+                title: 'The project name must not be empty!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return false;
+        }
+
+        if (projectName.length > 20) {
+            Swal.fire({
+                title: 'The project name must be at most 20 characters long!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return false;
+        }
+
+        // Съхраняване на името на проекта и UserId в localStorage
+        localStorage.setItem('projectName', projectName);
+        localStorage.setItem('projectDescription', projectDescription);
+        localStorage.setItem('userId', userId);
+
+        // Прехвърляне към следващата страница
+        window.location.href = '/CanvasMVC/SPAView';
+
+        // Предотвратяване подаването на формата
+        return false;
+    }
+
+
+    // отброяване на оставащите символи в полето за описание
+    document.getElementById('descriptionField').addEventListener('input', function (e) {
+        const target = e.target;
+        const maxLength = target.getAttribute('maxlength');
+        const currentLength = target.value.length;
+
+        // If you want to enforce the maximum length in the input field
+        if (currentLength >= maxLength) {
+            return;
+        }
+
+        document.getElementById('remainingCharacters').textContent = `Remaining characters: ${maxLength - currentLength}`;
+    });
+    
+    var elements = document.querySelectorAll('#transform3D_1, #transform3D_2');
+
+    elements.forEach(function (element) {
+        element.onmousemove = function (event) {
+            var rect = this.getBoundingClientRect();
+            var x = event.clientX - rect.left;
+            var y = event.clientY - rect.top;
+
+            var centerX = rect.width / 2;
+            var centerY = rect.height / 2;
+
+            var deltaX = x - centerX;
+            var deltaY = y - centerY;
+
+            var percentX = (deltaX / centerX) * 1200;
+            var percentY = (deltaY / centerY) * 1000;
+
+            this.style.transform = "perspective(500px) rotateX(" + (-percentY / 50) + "deg) rotateY(" + (percentX / 50) + "deg)";
+        }
+
+        element.onmouseleave = function (event) {
+            this.style.transform = "";
+        }
+    });
+
+    // adjust the textarea's height when the user types
+    const textarea = document.getElementById('descriptionField');
+
+    textarea.addEventListener('input', autoResize, false);
+
+    function autoResize() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }
+</script>

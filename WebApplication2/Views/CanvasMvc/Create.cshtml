@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Canvas
+@{
+    ViewData["Title"] = "Create";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/CreateStyles.css">
+
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/BackGround1.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-xl-10">
+        <div>
+            <div class="row g-0">
+                <div class="col-lg-6 align-items-center gradient-custom-2" id="transform3D_1" style="background-image: url('@Url.Content("~/Images/CreateDesign.jpg")'); background-size: cover; background-position: center;">
+                    <div class="text-white px-3 py-4 p-md-2 mx-md-1">
+                        <p class="mb-4 animated-text">
+                            Unleash your creativity and step into a world of infinite possibilities. Start your journey with us and create your unique design - a reflection of your vision and innovation. Empower your ideas, dare to dream big, and together, let's paint this world in the colours of your imagination.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center">
+                            <img class="rotate-slowly" src="~/Images/WRAP LOGO MILLENIUM.png" style="width: 300px;" alt="logo">
+                            <hr/>
+                            <h4 class="mt-1 mb-5 pb-1" style="color: gainsboro; text-shadow: 10px 10px 5px black;">We are The MILLENIUM Team</h4>
+                        </div>
+                        <form id="create-project-form" onsubmit="return submitProjectName()" method="post" enctype="multipart/form-data">
+                            <h5 style="color: gainsboro">Give a name to your project</h5>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-outline mb-4">
+                                <input asp-for="Name" class="form-control" autocomplete="off" aria-required="true" />
+                            </div>
+                            <h5 style="color: gainsboro">Add a description to your project</h5>
+                            <div class="form-outline mb-4">
+                                <textarea asp-for="Description" class="form-control autoExpand" id="descriptionField" autocomplete="off" aria-required="true" maxlength="300"></textarea>
+                                <small id="remainingCharacters" class="form-text" style="color: aquamarine">Remaining characters: 300</small>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                            <div>
+                                <a asp-action="Index" style="color: gainsboro;">Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_CreateScripts" />
+}

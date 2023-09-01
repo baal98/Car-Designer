@@ -1,0 +1,139 @@
+﻿@using System.Security.Claims
+@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.Html
+@model PaginatedList<SharedProjectViewModel>
+@{
+    ViewData["Title"] = "Shared Projects";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/ProjectCSS/Styles.css">
+<link rel="stylesheet" href="~/ProjectCSS/SharedProjects.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground2.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div>
+    <h1 class="panel-title">Public Gallery</h1>
+</div>
+
+<div class="row">
+    @foreach (var item in Model.Items)
+    {
+        <div class="col-md-2">
+            <div class="card mb-4">
+                <img class="card-img-top" style="cursor:pointer; width:100%; height: auto; margin-left: 6px; margin-top: 6px" src="@item.Thumbnail" alt="Canvas Thumbnail">
+                <div class="card-body">
+                    <h5>@item.CanvasName</h5>
+                    <p style="font-size: 8px; font-family: cursive">created by @item.Username</p>
+                    <p class="card-text">@Html.Encode(GetShortDescription(item.Description))</p>
+                    <div>
+                        @if (User.FindFirstValue(ClaimTypes.NameIdentifier) == item.UserId.ToString())
+                        {
+                            <div class="button-container">
+                                <form action="/Project/shared-projects-details" method="get">
+                                    <input type="hidden" name="id" value="@item.CanvasId" />
+                                    <button type="submit" class="btn btn-primary btn-fixed-size">Details</button>
+                                </form>
+                                <form action="/Project/delete" method="post">
+                                    <input type="hidden" name="projectId" value="@item.CanvasId" />
+                                    <button type="submit" class="btn btn-danger btn-fixed-size">Delete</button>
+                                </form>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="button-container">
+                                <form action="/Project/shared-projects-details" method="get">
+                                    <input type="hidden" name="id" value="@item.CanvasId" />
+                                    <button type="submit" class="btn btn-primary btn-fixed-size">Details</button>
+                                </form>
+                                @*<a action="/Project/shared-projects-details" asp-route-id="@item.CanvasId" class="btn btn-primary btn-fixed-size">Details</a>*@
+                                <form action="/Project/add-to-my-collection" method="post">
+                                    <input type="hidden" name="CanvasId" value="@item.CanvasId" />
+                                    <button type="submit" class="btn btn-success btn-fixed-size">Get It</button>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Генериране на пагинация -->
+@Html.Partial("_PaginationSharedProject", Model);
+
+@functions {
+    public HtmlString GetShortDescription(string description, int maxLength = 29)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+            return new HtmlString("<span class='text-danger'>No description available.</span>");
+
+    // Remove HTML tags
+        var regex = new Regex("<.*?>", RegexOptions.Multiline);
+        var plainTextDescription = regex.Replace(description, "");
+
+        if (plainTextDescription.Length <= maxLength) return new HtmlString(description);
+
+        var shortDesc = plainTextDescription.Substring(0, maxLength);
+        return new HtmlString(shortDesc + "...");
+    }
+}
+
+<!-- Modal -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body d-flex justify-content-center">
+                <img id="modalImage" src="" class="img-fluid w-100" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/ProjectCSS/ScriptsSharedProjetcs.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@Html.Partial("_SharedScripts")
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Yay!',
+            html: '<img src="@Url.Content("~/Images/smyleSuccess.png")" /> <br/> <p>@TempData["SuccessMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Ooops!',
+            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <p>@TempData["ErrorMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}

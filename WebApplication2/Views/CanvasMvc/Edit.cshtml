@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Canvas
+@{
+    ViewData["Title"] = "Edit";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/CreateStyles.css">
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/BackGround1.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<form method="post" asp-controller="CanvasMvc" asp-action="Edit" enctype="multipart/form-data" onsubmit="return submitEditProject()" id="edit-project-form">
+    <input type="hidden" asp-for="Id" id="projectId" />
+    <input type="hidden" asp-for="@Model.Thumbnail" id="projectThumbnail" />
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-4 row" style="background-image: url('@Url.Content("~/Images/ChatBackground1.jpg")'); background-size: cover; background-position: center;">
+                <div class="col-12 pb-2">
+                    <h2 class="text-primary">Update your project</h2>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" id="projectName" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <br />
+                <br />
+                <div class="mb-3">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="3" class="form-control" id="projectDescription"></textarea>
+                    <small id="remainingCharacters" class="form-text" style="font-size: 15px; color: darkblue">Remaining characters: 500</small>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary mt-4" style="width: 150px">Update</button>
+                    <a asp-controller="CanvasMvc" asp-action="Index" class="btn btn-secondary mt-4" style="color: aqua; width: 150px">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 pt-4">
+            <img src="@Model.Thumbnail"
+                 width="150%"  id="projectImage" />
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="Partials/_EditScripts" />
+}
+
+

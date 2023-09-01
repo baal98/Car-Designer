@@ -1,0 +1,136 @@
+﻿@model UserProfileViewModel
+@{
+    ViewData["Title"] = "Canvas Index";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/UsersCss/Styles.css">
+<link rel="stylesheet" href="~/UsersCss/GetUserProducts.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/BackGround4.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<hr />
+<div class="background-box orders-wrapper" style="height: 600px; overflow: auto;">
+    <h2 class="panel-title">Products</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">Creator</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Image</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Canvases)
+            {
+                <tr>
+                    <td>Name: @Model.User.FriendlyName
+                        <br/>
+                        E-mail: @Model.User.Email
+                        <br/>
+                        Phone: @Model.User.PhoneNumber
+                    </td>
+                    <td>@item.Name</td>
+                    <td class="text-center"><img style="cursor:pointer; width:100px; height: auto;" src="@item.Thumbnail" alt="Canvas Thumbnail"></td>
+                    <td class="text-center">@GetShortDescription(item.Description)</td>
+                    <td class="text-center">
+                        <div class="button-container">
+                            <form asp-controller="Users" asp-action="Details" method="get">
+                                <input type="hidden" name="canvasId" value="@item.Id" />
+                                <input type="hidden" name="userId" value="@item.UserId" />
+                                <input class="btn btn-success" type="submit" value="Details" />
+                            </form>
+                            <a class="btn btn-dark" style="color: #FFCD24" asp-controller="Users" asp-action="DownloadOrder" asp-route-id="@Model.User.Id" asp-route-canvasId="@item.Id">Download</a>
+                            <form id="deleteForm-@item.Id" asp-action="Remove" method="post">
+                                <input type="hidden" name="CanvasId" value="@item.Id" />
+                                <input type="hidden" name="Thumbnail" value="@item.Thumbnail" />
+                                <input type="hidden" name="UserId" value="@item.UserId" />
+                                <button onclick="deleteItem(event, 'deleteForm-@item.Id')" type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body d-flex justify-content-center">
+                    <img id="modalImage" src="" class="img-fluid w-100" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery.min.js"></script>
+
+@functions {
+    public HtmlString GetShortDescription(string description, int maxLength = 29)
+    {
+        if (string.IsNullOrEmpty(description))
+            return new HtmlString("<span class='text-danger'>No description available.</span>");
+
+        // Remove HTML tags
+        var regex = new Regex("<.*?>", RegexOptions.Multiline);
+        var plainTextDescription = regex.Replace(description, "");
+
+        if (plainTextDescription.Length <= maxLength) return new HtmlString(HttpUtility.HtmlEncode(description));
+
+        var shortDesc = plainTextDescription.Substring(0, maxLength);
+        return new HtmlString(HttpUtility.HtmlEncode(shortDesc + "..."));
+    }
+    }
+
+<script>
+    $(document).ready(function () {
+        $('img').click(function () {
+            $('#modalImage').attr('src', $(this).attr('src'));
+            $('#imagePreviewModal').modal('show');
+        });
+    });
+    function deleteItem(event, formId) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Are you sure?',
+            html: '<img src="@Url.Content("~/Images/ThinkItFace.png")" /> <br/> <p>You won\'t be able to revert this!</p>',
+            icon: null,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Deleted!',
+                    html: '<img src="@Url.Content("~/Images/CryingFace.png")" /> <br/> <p>The item has been deleted!</p>',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Okay'
+                }).then(() => {
+                    document.getElementById(formId).submit();
+                });
+            }
+        });
+    }
+</script>
+
+<script src="~/UsersCss/scripts.js"></script>
+

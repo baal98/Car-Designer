@@ -1,0 +1,79 @@
+﻿.panel-title {
+    font-family: 'RocknRollOne-Regular', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    color: #050997;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+    -webkit-text-stroke: 1px #5156FC;
+    margin-bottom: 0px;
+}
+
+.thick-bordered th, .thick-bordered td {
+    border: 3px solid black;
+    box-sizing: border-box;
+}
+
+@keyframes pulse {
+     0% {
+         opacity: 1;
+     }
+
+     50% {
+         opacity: 0.2;
+     }
+
+     100% {
+         opacity: 1;
+     }
+ }
+
+.blinking {
+    animation: pulse 2s infinite;
+}
+
+.table-wrapper {
+    background-color: rgba(255,255,255,0.3);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.thick-bordered {
+    border: 3px solid black;
+}
+
+.thick-bordered th, .thick-bordered td {
+    border: 3px solid black;
+}
+
+.modal-content {
+    background: rgba(44,150,150,1) !important; /* Фон с ..% прозрачност */
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 50% !important;
+}
+
+.user-table {
+    width: auto;
+    margin-left: 50px;
+    color: darkblue;
+    background-color: #f8f9fa;
+}
+
+.rounded-modal .modal-content {
+    border-radius: 15px !important; /* This sets the border radius */
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100% - 1rem);
+}

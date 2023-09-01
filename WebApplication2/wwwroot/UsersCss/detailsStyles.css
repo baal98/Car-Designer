@@ -1,0 +1,20 @@
+.canvas-body {
+    background-color: #ffd600;
+}
+
+.canvas-body nav.navbar {
+    background-color: #1A56E7;
+    height: 60px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px; /* Added this line to round the corners of the main card */
+}
+
+.extra-container {
+    background-color: #FFFFFF; /* Added this class for a new container with white color */
+    border-radius: 15px; /* Round the corners of the new container */
+    margin: 15px 0; /* Add some margin to the top and bottom */
+    padding: 15px; /* Add some padding */
+}

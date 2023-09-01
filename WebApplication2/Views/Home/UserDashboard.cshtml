@@ -1,0 +1,169 @@
+﻿@model UserProfileViewModel
+@inject IOrderService _orderService
+@{
+    var orderHeaders = await _orderService.GetOrdersForUser(Model.User.Id);
+    bool hasOrder = orderHeaders.Any();
+}
+
+@{
+    ViewData["Title"] = "User Dashboard";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+<style>
+    .background-box {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+</style>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground3.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>
+    Welcome to your dashboard,
+    @(Model.User != null && !string.IsNullOrEmpty(Model.User.FriendlyName) ? Model.User.FriendlyName.Split(' ')[0] : User.Identity.Name)!
+</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="background-box personal-info-wrapper">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>Personal Info</h3>
+                @if (Model.User != null && !string.IsNullOrEmpty(Model.User.ImageUrl))
+                {
+                    <img src="@Model.User.ImageUrl" alt="User Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;" />
+                }
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Name:</th>
+                    <td>@(Model.User != null && Model.User.FriendlyName != null ? Model.User.FriendlyName : "Not provided")</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>@(Model.User != null && Model.User.Email != null ? Model.User.Email : "Not provided")</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>
+                        @(Model.User != null && Model.User.Address != null && Model.User.City != null && Model.User.Country != null ? Model.User.Address.BuildingNumber + ", " 
+                                                                                                                                      + Model.User.Address.Street +" " + "str., " 
+                                                                                                                                      + Model.User.City.Name + ", " 
+                                                                                                                                      + Model.User.Country.Name : "Not provided")
+                    </td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td>@(Model.User != null ? (Model.User)?.PhoneNumber ?? "Not provided" : "Not provided")</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a href="/Identity/Account/Manage" class="btn btn-primary">Change Personal Info</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    @if (hasOrder)
+    {
+        <div class="col-md-6">
+            <div class="background-box orders-wrapper" style="height: 600px; overflow: auto;">
+                <h3>Orders</h3>
+                @using (Html.BeginForm("FilterOrders", "Home", FormMethod.Get, new { id = "filterForm" }))
+                {
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="mb-3">
+                                <label class="form-label-add-edit">Start date:</label>
+                                <input id="startDate" name="startDate" class="form-control" type="date"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="mb-3">
+                                <label class="form-label-add-edit">End date:</label>
+                                <input id="endDate" name="endDate" class="form-control" type="date"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="mb-3">
+                                <label class="form-label-add-edit invisible">Button</label>
+                                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="mb-3">
+                                <label class="form-label-add-edit invisible">Button</label>
+                                <button type="button" class="btn btn-secondary w-100" id="getAllOrders">All Orders</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (Model.Orders != null && Model.Orders.Count > 0)
+                {
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Order Total</th>
+                            <th>Order Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                <td>@order.OrderTotal.ToString("F2")</td>
+                                <td>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach (var item in order.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td>@item.Product.Id</td>
+                                                <td>@item.Product.Title</td>
+                                                <td>@item.Count</td>
+                                                <td>@item.Product.Price.ToString("F2")</td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<script>
+    document.getElementById("getAllOrders").addEventListener("click", function () {
+        location.href = '@Url.Action("GetAllOrders", "Home")';
+    });
+</script>

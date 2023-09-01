@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "User Guide - Vehicle Sticker Designer";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/ProjectCSS/Styles.css">
+<link rel="stylesheet" href="~/ProjectCSS/SharedProjects.css">
+
+<style>
+    .user-guide {
+        font-family: Arial, sans-serif;
+        color: #333;
+        padding: 20px;
+        background: #f9f9f9;
+        background: rgba(249, 249, 249, 0.7);
+        border-radius: 10px;
+    }
+
+    .user-guide h1, .user-guide h2 {
+        color: #2c3e50;
+    }
+
+    .user-guide img {
+        width: 100%;
+        max-width: 600px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .user-guide section {
+        margin-bottom: 30px;
+    }
+
+    .user-guide footer {
+        text-align: center;
+        padding: 10px;
+        background: #2c3e50;
+        color: #fff;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/UserGuideBackground.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div>
+    <h1 class="panel-title">User Guide<br/>for Vehicle Sticker Designer</h1>
+</div>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="container user-guide">
+    <p style="text-align: center;"><b>Welcome to the Vehicle Sticker Designer user guide! Here, you'll find step-by-step instructions to help you create and customize your vehicle stickers. Let's get started</b></p>
+
+    <section id="getting-started">
+        <h2>Getting Started with SPA</h2>
+        <ol>
+            <li>Choose a background image on which you will work.</li>
+            <li>Resize the main picture so that the actual dimensions match the scale.</li>
+            <li>Position the base in the center of the workspace for convenience.</li>
+            <li>Keep in mind that the image is "locked" in place, and to unlock and move it, you will need to "double click" the cursor on it, after which it will lock again!</li>
+            <img src="~/ScreenShots/SPA_BackGround1.jpg" alt="SPA Page" />
+        </ol>
+    </section>
+
+    <section id="sticker-customization">
+        <h2>Sticker Customization</h2>
+        <ol>
+            <li>Select an object from the gallery or your own element and move it to the desired location.</li>
+            <li>Scale, rotate, and flip the selected objects.</li>
+            <li>Use "Shift" for non-proportional resizing.</li>
+            <li>"Shift" + ↑ or "Shift" + ↓ - moves the object one level up or down relative to other objects.</li>
+            <li>SVG graphic objects can be colored and have an Outline applied.</li>
+            <img src="~/ScreenShots/Spa.jpg" alt="SPA Application" />
+        </ol>
+    </section>
+
+    <section id="price-and-material">
+        <h2>Price Information & Material Selection</h2>
+        <ol>
+            <li>When an object is selected, the real dimensions, area in square centimeters, and the value of the object are displayed in the lower left corner.</li>
+            <li>The right information section displays the area, value, and number of objects on the workspace.</li>
+            <li>There are also two buttons to determine the type of working material - automotive and traction foil.</li>
+        </ol>
+    </section>
+
+    <section id="export-and-save">
+        <h2>Export & Save</h2>
+        <ol>
+            <li>If desired, you can save the project to your computer by pressing the "Save to PDF" or "Save to JPEG" buttons.</li>
+            <li>Important! The background image is used only for visual representation of how the stickers will look on it and is not calculated in the price!</li>
+            <li>You can save the project and edit it at a later stage, share it with other users, or add it to the user's cart.</li>
+            <li>Good luck!</li>
+        </ol>
+    </section>
+    
+    <section id="chat-and-share">
+        <h2>Chat & Share</h2>
+        <p>You can save the project and edit it at a later stage, share it with other users, or add it to the user's cart. Engage with other users through the real-time chat feature. Good luck!</p>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <img src="~/ScreenShots/CreateWindow.jpg" alt="Create Window" />
+            <img src="~/ScreenShots/UserGallery.jpg" alt="User Gallery" />
+            <img src="~/ScreenShots/ShoppingCart.jpg" alt="Shopping Cart" />
+            <img src="~/ScreenShots/Chat.jpg" alt="Chat" />
+        </div>
+    </section>
+
+
+    <footer>
+        <p>For any further assistance, feel free to reach out to our support team.</p>
+    </footer>
+    <br/>
+    <div style="text-align: center;">
+        <h3>Useful links:</h3>
+        <a href="https://www.haarp.bg">HAARP.bg</a>,
+        <a href="https://www.reklamata.net">REKLAMATA.net</a>
+    </div>
+</div>

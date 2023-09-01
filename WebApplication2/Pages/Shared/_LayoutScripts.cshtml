@@ -1,0 +1,43 @@
+﻿@*<script src="~/Carousel/js/jquery-ui.min.js"></script>*@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+@*<script src="~/Carousel/js/showhide.js"></script>*@
+<script src="~/Carousel/js/jquery.mousewheel.js"></script>
+<script src="~/Carousel/js/ddsmoothmenu.js"></script>
+<script src="~/Carousel/js/advCarousel.js"></script>
+<script src="~/Carousel/js/cloud-carousel.1.0.5.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/js/html2canvas.min.js"></script>
+<script src="~/Original_WorkVersion/fabric.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/js/lazy.js" asp-append-version="true"></script>
+<script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+<script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
+<script src="~/js/Chat_JS/globalChat.js"></script>
+
+<script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/qrmnfbjwj0gsk8e2d1c8eo8lltiylhx43s9imjpthf2g37e2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+    // Скриване на спинера при напълно заредена страница
+    $(window).on('load', function () {
+        $('#spinner').hide();
+    });
+
+    // Функция, която показва спинера при клик върху връзките
+    $(document).on('click', 'a', function () {
+        $('#spinner').show();
+    });
+
+    // Функция, която скрива спинера при приключване на AJAX заявка
+    $(document).ajaxStop(function () {
+        $('#spinner').hide();
+    });
+
+    function editProject(projectId) {
+        window.location.href = `/Original_WorkVersion/index.html?projectId=${projectId}`;
+    }
+</script>

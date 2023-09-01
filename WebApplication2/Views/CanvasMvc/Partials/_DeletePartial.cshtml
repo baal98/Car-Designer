@@ -1,0 +1,84 @@
+﻿<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const form = document.getElementById('deleteForm');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                html: '<img src="@Url.Content("~/Images/ThinkItFace.png")" /> <br/> <p>You won\'t be able to revert this!</p>',
+                icon: null, // Set the icon to null
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Show the spinner when the user confirms
+                    document.getElementById('spinner').style.display = 'block';
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: {
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        }
+                    }).then(function (response) {
+                        if (response.ok) {
+                            Swal.fire({
+                                title: 'Phhh!',
+                                html: '<img src="@Url.Content("~/Images/CryingFace.png")" /> <br/> <p>Your project has been deleted!</p>',
+                                confirmButtonText: 'Okay',
+                                showClass: {
+                                    popup: 'animate__animated animate__fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate__animated animate__fadeOutUp'
+                                }
+                            }).then(() => {
+                                // Reactivate the spinner until the next page loads
+                                document.getElementById('spinner').style.display = 'block';
+                                window.location.href = '@Url.Action("Index", "CanvasMvc")';
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <br/> <p>An error occurred while deleting the project.</p>',
+                                icon: 'error',
+                                confirmButtonText: 'Okay',
+                                showClass: {
+                                    popup: 'animate__animated animate__fadeInDown'
+                                },
+                                hideClass: {
+                                    popup: 'animate__animated animate__fadeOutUp'
+                                }
+                            });
+                        }
+                    }).catch(function () {
+                        Swal.fire({
+                            title: 'Error!',
+                            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <br/> <p>An error occurred while deleting the project.</p>',
+                            icon: 'error',
+                            confirmButtonText: 'Okay',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        });
+                    }).finally(() => {
+                        // Do not hide the spinner. It will keep running until the next page loads
+                    });
+                }
+            });
+        });
+    });
+</script>

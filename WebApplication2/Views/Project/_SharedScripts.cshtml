@@ -1,0 +1,83 @@
+﻿<script>
+    $('.btn-danger').on('click', function (e) {
+        e.preventDefault(); // Prevent the default action of the delete button
+
+        var form = $(this).parents('form'); // Find the form that contains the delete button
+
+        Swal.fire({
+            title: 'Are you sure?',
+            html: '<img src="@Url.Content("~/Images/ThinkItFace.png")" /> <br/> <p>This action cannot be undone!</p>',
+            icon: null,
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        }).then((result) => {
+            if (result.value) {
+                // Show the spinner when the user confirms
+                document.getElementById('spinner').style.display = 'block';
+
+                fetch(form.attr('action'), {
+                    method: 'POST',
+                    body: new FormData(form[0]), // form is a jQuery object, form[0] gives us the raw DOM object
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    }
+                }).then(function (response) {
+                    if (response.ok) {
+                        Swal.fire({
+                            title: 'Phhh!',
+                            html: '<img src="@Url.Content("~/Images/CryingFace.png")" /> <br/> <p>Your project has been deleted!</p>',
+                            confirmButtonText: 'Okay',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        }).then(() => {
+                            // Reactivate the spinner until the next page loads
+                            document.getElementById('spinner').style.display = 'block';
+                            window.location.href = '@Url.Action("Index", "CanvasMvc")';
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error!',
+                            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <br/> <p>An error occurred while deleting the project.</p>',
+                            icon: 'error',
+                            confirmButtonText: 'Okay',
+                            showClass: {
+                                popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        });
+                    }
+                }).catch(function () {
+                    Swal.fire({
+                        title: 'Error!',
+                        html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <br/> <p>An error occurred while deleting the project.</p>',
+                        icon: 'error',
+                        confirmButtonText: 'Okay',
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    });
+                }).finally(() => {
+                    // Do not hide the spinner. It will keep running until the next page loads
+                });
+            }
+        });
+    });
+</script>

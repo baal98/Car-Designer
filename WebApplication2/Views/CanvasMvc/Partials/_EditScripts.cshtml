@@ -1,0 +1,91 @@
+﻿<script>
+    tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            toolbar_mode: 'floating',
+            init_instance_callback: function (editor) {
+                editor.on('keydown', function (e) {
+                    const maxLength = 500;
+                    const currentLength = editor.contentDocument.body.innerText.length;
+
+                    if (currentLength >= maxLength) {
+                        if (e.keyCode != 8) { // Allow to delete characters
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    }
+
+                    document.getElementById('remainingCharacters').textContent = `Remaining characters: ${maxLength - currentLength}`;
+                });
+            },
+        });
+
+
+    const userId = '@Model.UserId';
+    const projectId = document.getElementById('projectId').value;
+
+    function submitEditProject() {
+        const projectNameInput = document.getElementById('projectName');
+        const projectDescriptionInput = document.getElementById('projectDescription');
+        const projectName = projectNameInput.value;
+        const projectDescription = tinyMCE.get('projectDescription').getContent();
+
+        if (projectName.length === 0) {
+            Swal.fire({
+                title: 'Името на проекта не трябва да е празно!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return false;
+        }
+
+        if (projectName.length > 20) {
+            Swal.fire({
+                title: 'Името на проекта трябва да е най-много 20 символа дълго!',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+            return false;
+        }
+
+        localStorage.setItem('projectName', projectName);
+        localStorage.setItem('projectDescription', projectDescription);
+        localStorage.setItem('userId', userId);
+
+        // Encode the projectDescription for safe URL usage
+        let encodedProjectDescription = encodeURIComponent(projectDescription);
+
+        window.location.href = `/CanvasMVC/SPAView?projectId=${projectId}&projectName=${projectName}&projectDescription=${encodedProjectDescription}&userId=${userId}`;
+
+        return false;
+    }
+
+    document.getElementById('projectDescription').addEventListener('input', function (e) {
+        const target = e.target;
+        const maxLength = target.getAttribute('maxlength');
+        const currentLength = target.value.length;
+
+        if (currentLength >= maxLength) {
+            return;
+        }
+
+        document.getElementById('remainingCharacters').textContent = `Remaining characters: ${maxLength - currentLength}`;
+    });
+
+    const textarea = document.getElementById('projectDescription');
+
+    textarea.addEventListener('input', autoResize, false);
+
+    function autoResize() {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    }
+</script>

@@ -1,0 +1,12 @@
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\bin\Debug\net6.0\AdvertisingAgency.Web.Tests.deps.json
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\bin\Debug\net6.0\AdvertisingAgency.Web.Tests.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\bin\Debug\net6.0\AdvertisingAgency.Web.Tests.pdb
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.csproj.AssemblyReference.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.AssemblyInfoInputs.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.AssemblyInfo.cs
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.csproj.CoreCompileInputs.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\refint\AdvertisingAgency.Web.Tests.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\AdvertisingAgency.Web.Tests.pdb
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Web.Tests\obj\Debug\net6.0\ref\AdvertisingAgency.Web.Tests.dll

@@ -1,0 +1,126 @@
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; /* Hide scrollbars */
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  background: linear-gradient(135deg, #055a7f, #757005, #77a7bc);  /*Customize the colors and angle as needed */
+}
+
+#header-h1 {
+  display: block;
+  font-size: 3.9em;
+  text-align: center;
+  font-family: cursive;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  
+  position: absolute; /* optional: this will position the h1 relative to the canvas container */
+  top: 0px; /* adjust this value to move the h1 up or down */
+  left: 50%; /* adjust this value to move the h1 left or right */
+  transform: translateX(-50%); /* optional: this will center the h1 */
+  z-index: 1; /* optional: this will put the h1 above the canvas container */
+
+  font-weight: bold;
+  color: #10048f18; /* optional: this will give the h1 a color */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* optional: this will give the h1 a shadow */
+  -webkit-text-stroke: 1px #e6ba23; /* optional: this will give the h1 a stroke */
+}
+
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  z-index: 1;
+  cursor: se-resize;
+}
+
+.handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.top-left {
+  top: -5px;
+  left: -5px;
+  cursor: nw-resize;
+}
+
+.top-right {
+  top: -5px;
+  right: -5px;
+  cursor: ne-resize;
+}
+
+.bottom-left {
+  bottom: -5px;
+  left: -5px;
+  cursor: sw-resize;
+}
+
+.bottom-right {
+  bottom: -5px;
+  right: -5px;
+  cursor: se-resize;
+}
+
+#legend h2 {
+  font-size: 18px;
+  margin: 0px;
+  margin-top: 5px;
+}
+
+#legend {
+  display: flex;
+  flex-direction: column;
+}
+
+#legend .columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#legend ul {
+  list-style-type: disc;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  padding-left: 50px;
+  font-size: 15px;
+}
+
+#legend li {
+  padding: 5px;
+}
+
+/* instructions' style */
+#instructions {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+    width: 76.65%;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: justify;
+    top: 405px;
+    position: absolute;
+}

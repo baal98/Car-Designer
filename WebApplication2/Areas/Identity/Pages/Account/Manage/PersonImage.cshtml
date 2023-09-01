@@ -1,0 +1,63 @@
+﻿@page
+@using AdvertisingAgency.Data.Data.Models
+@*@using AdvertisingAgency.Services.AzureStorage
+@using AdvertisingAgency.Services.Interfaces*@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model PersonImageModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@*@inject IAzureStorageService AzureBlobService
+@inject IImageService ImageService*@
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    ViewData["Title"] = "Profile Picture";
+    ViewData["ActivePage"] = ManageNavPages.PersonImage;
+    ViewData["BodyClass"] = "canvas-body";
+}
+
+<style>
+    .canvas-body {
+        background-color: navajowhite;
+    }
+
+        .canvas-body nav.navbar {
+            background-color: cornflowerblue;
+        }
+</style>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+
+<h3 style="text-align: center">@ViewData["Title"]</h3>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="d-flex flex-column align-items-center mb-4">
+        <div class="form-outline mb-3">
+            <div class="image-container">
+                @if (!string.IsNullOrEmpty(Convert.ToString(user.ImageUrl)))
+                {
+                    <img src="@user.ImageUrl" alt="Profile Picture" class="profile-picture" style="width: 100%; max-width: 300px; margin-bottom: 10px;" />
+                }
+            </div>
+            <input type="file" class="form-control" name="Input.Image" id="Input_Image" accept="image/*" style="max-width: 300px;" />
+            <label for="Input_Image">Profile Picture</label>
+            <span class="text-danger">@Html.ValidationMessageFor(model => model.Input.Image)</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Image</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Convert.ToString(user.ImageUrl)))
+{
+    <form method="post">
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-danger" 
+                    onclick="return confirm('Are you sure you want to delete your profile image?')" 
+                    formaction="/Identity/Account/Manage/PersonImage?handler=Delete">Delete Image</button>
+        </div>
+    </form>
+}
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

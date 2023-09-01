@@ -1,0 +1,56 @@
+﻿.panel-title {
+    font-family: 'RocknRollOne-Regular', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    color: #ffd600;
+    text-shadow: 8px 8px 12px rgba(255,255,255,5);
+    font-weight: bold;
+    -webkit-text-stroke: 1px #fa8072;
+    animation: blink 3s linear infinite;
+}
+
+@keyframes blink {
+     0% {
+         opacity: 1;
+     }
+
+     50% {
+         opacity: 0;
+     }
+
+     100% {
+         opacity: 1;
+     }
+ }
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-fixed-size {
+    width: 67px;
+    height: 30px;
+    white-space: normal;
+    white-space: normal;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(255,255,255,0.8) !important; /* Бял фон с 80% прозрачност */
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 50% !important;
+}

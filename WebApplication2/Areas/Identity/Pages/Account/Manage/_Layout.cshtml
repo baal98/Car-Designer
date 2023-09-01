@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using AdvertisingAgency.Data.Data.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+
+    var user = await UserManager.GetUserAsync(User);
+
+    var isProfileIncomplete = (!user.PhoneNumberConfirmed)
+                              || user.AddressId == null
+                              || user.CityId == null
+                              || user.CountryId == null
+                              || user.FriendlyName == null;
+}
+
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-2; background-image: url('@Url.Content("~/Images/ChatBackground1.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1>Manage your account</h1>
+
+@if (isProfileIncomplete)
+{
+    <div class="alert alert-warning" role="alert">
+        Your profile is incomplete! Please update your information.
+        (required fields are FriendlyName, Phone and Address)
+    </div>
+}
+
+<div>
+    <h2>Change your account settings</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+

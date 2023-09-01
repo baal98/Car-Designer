@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Security.Claims
+@model SharedProjectViewModel
+@{
+    ViewData["Title"] = "Details";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/detailsStyles.css">
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-2; background-image: url('@Url.Content("~/Images/ProductDetailsBackGround.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<link rel="stylesheet" href="~/MVC CSS_JS/DeleteStyles.css">
+
+<div style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/AnimateCar1.gif")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<hr />
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-xl-10">
+        <div>
+            <div class="row g-0">
+                <div class="col-lg-6 align-items-center gradient-custom-2" id="transform3D_1" 
+                     style="background-image: url('@Url.Content("~/Images/BackGroundCar1.png")'); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: flex-start;">
+                    <div class="text-white px-3 py-4 p-md-2 mx-md-1" style="text-align: center;">
+                        <p class="mb-4 animated-text" style="font-family: monospace; font-size: 36px; line-height: 1.5;">
+                            "Drive Your Vision.<br />Make Your Vehicle<br />a Canvas for Creativity!"
+                        </p>
+                        <p class="mb-4" style="font-family: monospace; margin-top: 250px; font-size: 18px; line-height: 1.5;">
+                            @Html.Encode(Model.Description)
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center" style="z-index: -3">
+                        <img class="rotate-slowly" src="~/Images/WRAP LOGO MILLENIUM.png"
+                             style="width: 280px;" alt="logo">
+                    </div>
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center">
+                            <img id="transform3D_2" src="@Model.Thumbnail"
+                                 style="width: 360px; margin-bottom: 20px" alt="logo">
+                        </div>
+
+                        <h3 class="h3-custom-font" style="margin-top: 0px; text-align: center; color: gainsboro">You are about to forge<br />a new project<br />from this template:<br /><span style="color: burlywood; font-size: 30px">@Model.CanvasName </span><br /><span style="text-decoration: none; color: #5255DB;">created by @Model.Username <br /> on @Model.CreatedOn.ToString("d MMM yyyy")</span></h3>
+
+                        @if (User.FindFirstValue(ClaimTypes.NameIdentifier) != Model.UserId.ToString())
+                        {
+                            <div class="form-group d-flex justify-content-center">
+                                <form action="/Project/add-to-my-collection" method="post">
+                                    <input type="hidden" name="CanvasId" value="@Model.CanvasId"/>
+                                    <button type="submit" class="btn btn-success btn-sm">Get It</button>
+                                </form>
+                            </div>
+                        }
+                        <br/>
+                        <div class="form-group d-flex justify-content-center">
+                            <a href="/Project/shared-projects" class="btn btn-light btn-sm">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

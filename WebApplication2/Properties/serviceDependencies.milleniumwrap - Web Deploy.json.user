@@ -1,0 +1,66 @@
+{
+  "dependencies": {
+    "storage2": {
+      "restored": true,
+      "restoreTime": "2023-08-02T09:50:36.6558451Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2023-08-02T09:48:23.638787Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2023-08-02T09:47:22.5415084Z"
+    },
+    "storage1": {
+      "restored": true,
+      "restoreTime": "2023-08-02T09:48:46.6733235Z"
+    },
+    "signalr1": {
+      "restored": true,
+      "restoreTime": "2023-08-02T09:50:17.6080898Z"
+    }
+  },
+  "parameters": {
+    "storage2.resourceGroupName": {
+      "Name": "storage2.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "DefaultResourceGroup-DEWC"
+    },
+    "signalr1.resourceGroupName": {
+      "Name": "signalr1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "WebApp"
+    },
+    "secrets1.resourceGroupName": {
+      "Name": "secrets1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "WebApp"
+    },
+    "storage1.resourceGroupName": {
+      "Name": "storage1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "DefaultResourceGroup-DEWC"
+    },
+    "storage2.subscriptionId": {
+      "Name": "storage2.subscriptionId",
+      "Type": "subscription",
+      "Value": "b41d58ea-235b-45af-ad17-ad2a9e16e9df"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "b41d58ea-235b-45af-ad17-ad2a9e16e9df"
+    },
+    "storage1.subscriptionId": {
+      "Name": "storage1.subscriptionId",
+      "Type": "subscription",
+      "Value": "b41d58ea-235b-45af-ad17-ad2a9e16e9df"
+    },
+    "secrets1.subscriptionId": {
+      "Name": "secrets1.subscriptionId",
+      "Type": "subscription",
+      "Value": "b41d58ea-235b-45af-ad17-ad2a9e16e9df"
+    }
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorate Image</title>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./CSS/main_styles.css">
+    <link rel="stylesheet" href="./CSS/body_styles.css">
+    <link rel="stylesheet" href="./CSS/ruller_styles.css">
+    <link rel="stylesheet" href="./CSS/galleryStyles.css">
+    <link rel="stylesheet" href="./CSS/buttonStyles.css">
+    <link rel="stylesheet" href="../css/spinner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="sidebar-left">
+            <!-- Add buttons or other interface for selecting PNG objects here -->
+            <div id="gallery">
+                <p class="centered-text">Gallery</p>
+                <div>
+                    <input type="radio" id="fill-radio" name="color-mode" value="fill" checked>
+                    <label for="fill-radio">Fill</label>
+                    <input type="radio" id="outline-radio" name="color-mode" value="outline">
+                    <label for="outline-radio">Outline</label>
+                </div>
+                <div>
+                    <!-- <label for="colorPicker">Цвят</label> -->
+                    <input class="color-picker" type="color" id="colorPicker" value="#000000" />
+                    <input class="color-outline" type="number" id="stroke-width" min="0" value="0">
+
+                    <button id="transparent-svg">Направи SVG прозрачен</button>
+
+                </div>
+
+                <div>
+                    <!-- <label for="stroke-width">Ширина на контура:</label> -->
+                    <!-- <input class="color-outline" type="number" id="stroke-width" min="0" value="0"> -->
+                </div>
+
+                <!-- <div>
+                    <label for="stroke-dash-array">Тип на линията:</label>
+                    <select class="color-outline" id="stroke-dash-array">
+                        <option value="solid">Солидна</option>
+                        <option value="dashed">Пунктирана</option>
+                        <option value="dotted">Точкова</option>
+                    </select>
+                    <select class="color-outline" id="stroke-alignment">
+                        <option value="center">Център</option>
+                        <option value="inside">Вътре</option>
+                        <option value="outside">Вън</option>
+                    </select>
+                </div> -->
+                <!-- <input class="gallery-button" type="color" id="colorPicker" value="#000000" /> -->
+                <div id="objects">
+                    <button class="gallery-button" data-src="./images/png-object-1.png">Object 1</button>
+                    <button class="gallery-button" data-src="./images/png-object-2.png">Object 2</button>
+                    <button class="gallery-button" data-src="./images/png-object-3.png">Object 3</button>
+                    <button class="gallery-button" data-src="./images/SVG/1.svg" data-filename="33.svg">SVG1</button>
+                    <button class="gallery-button" data-src="./images/SVG/2.svg">SVG2</button>
+                    <button class="gallery-button" data-src="./images/SVG/3.svg">SVG3</button>
+                    <button class="gallery-button" data-src="./images/SVG/4.svg">SVG4</button>
+                    <button class="gallery-button" data-src="./images/SVG/5.svg">SVG5</button>
+                    <button class="gallery-button" data-src="./images/SVG/6.svg">SVG6</button>
+                    <button class="gallery-button" data-src="./images/SVG/7.svg">SVG7</button>
+                    <button class="gallery-button" data-src="./images/SVG/8.svg">SVG8</button>
+                    <button class="gallery-button" data-src="./images/SVG/9.svg">SVG9</button>
+                </div>
+            </div>
+        </div>
+        <div id="images">
+            <!-- Add your images here -->
+        </div>
+        <div id="main">
+            <h1 id="header-h1">Enjoy & Fun</h1>
+            <!-- <h1 id="header-h1">Create Your Own Design</h1> -->
+            <div id="canvas-container">
+                <canvas id="canvas" width="1200" height="800"></canvas>
+                <!--<div class="resize-handle top-left"></div>
+                <div class="resize-handle top-right"></div>
+                <div class="resize-handle bottom-left"></div>
+                <div class="resize-handle bottom-right"></div>-->
+                <div id="object-info">
+                    <p>Object Width: <span id="object-width"></span></p>
+                    <p>Object Height: <span id="object-height"></span></p>
+                    <p>Object Area: <span id="object-area"></span></p>
+                    <p>Object Price: $<span id="object-price"></span></p>
+                </div>
+                <!-- <canvas id="ruler" width="1200" height="20"></canvas> -->
+                <div id="middle-number-container">
+                    <canvas id="number" width="600" height="70"></canvas>
+                </div>
+                <div id="number-container">
+                    <canvas id="middle-number" width="600" height="70"></canvas>
+                </div>
+                <div id="ruler-container">
+                    <!-- <div id="ruler-numbers"></div> -->
+                    <canvas id="ruler" width="1200" height="30"></canvas>
+                </div>
+            </div>
+            <div id="instructions" style="display: none;">
+                <p>
+                    Изберете картинка за фон, върху която ще работите. Използвайте скролера на мишката за
+                    оразмеряване на картинката, така че реалните размери да отговарят на скалата. Позиционирайте
+                    в
+                    средата на работния плот основата, така че да е удобна за работа. Изберете обект от
+                    галерията и
+                    го преместете на желаното от Вас място. Използвайте "<-" или "->" за да въртите обекта в
+                                                                             желаната посока. При маркиране на обект, в долният ляв ъгъл се изписват реалните
+                                                                             размери, площ в кв.см и стойността на обекта. В дясната информационна част се изписват -
+                                                                             площта, стойността и броя на обектите, които са на работния плот. Там се намират и два
+                                                                             бутона за определяне вида на работния материал - автомобилно и трационно фолио. При
+                                                                             желание може да съхраните проекта на компютъра си чрез натискане на бутона "Export" .
+                                                                             При завършване на проекта добавете артикулите в потребителската кошница. Успех!
+                </p>
+            </div>
+            <div id="text-controls" style="display: flex; flex-wrap: nowrap; align-items: center;">
+
+                <!--<button class="upload-button" id="undo">Undo</button>
+                <button class="upload-button" id="redo">Redo</button>
+                <input class="upload-button" type="file" id="base-image-input" accept="image/*" style="display: none;" />
+                <label for="base-image-input" class="upload-button">Background Picture</label>
+
+                <input type="file" id="upload-image" accept="image/*" style="display: none;">
+                <label for="upload-image" class="upload-button">Your logo</label>-->
+                <button class="upload-button-sidebar-left" id="toggle-instructions">Show Instructions</button>
+                <button class="upload-button-sidebar-left" id="undo">Undo</button>
+                <button class="upload-button-sidebar-left" id="redo">Redo</button>
+                <input class="upload-button-sidebar-left" type="file" id="base-image-input" accept="image/*" style="display: none;" />
+                <label for="base-image-input" class="upload-button-sidebar-left">Background Picture</label>
+
+                <input type="file" id="upload-image" accept="image/*" style="display: none;">
+                <label for="upload-image" class="upload-button-sidebar-left">Your logo</label>
+                <button class="upload-button-sidebar-left" id="exportPDFButton">Export to PDF</button>
+                <button class="upload-button-sidebar-left" id="exportJPEGButton">Export to JPEG</button>
+                <button class="upload-button-sidebar-left" id="save-project">Save Project</button>
+                <!--<button class="upload-button-sidebar-left" id="load-project">Зареди проекта</button>-->
+                <button class="upload-button-sidebar-left" id="load-project" onclick="loadProject()">Go Back</button>
+            </div>
+        </div>
+        <div id="sidebar-right">
+            <div id="price-options">
+                <p class="centered-text">Choose your material:</p>
+                <input type="radio" id="ordinary-foil" name="price" value="1" checked>Ordinary foil
+                <input type="radio" id="auto-foil" name="price" value="2"> Auto foil
+                <div id="price-info">
+                    <p class="centered-text">Info:<span id="all-objects-price"></span></p>
+                    <p>Total Area: <span id="total-area">0</span> m2</p>
+                    <p>Total Price: $<span id="total-price">0</span></p>
+                    <p>Total Objects: <span id="all-objects-area">0</span></p>
+                </div>
+                <div>
+                    <button class="upload-button-sidebar-left" id="toggle-drawing-mode">Рисуване</button>
+                    <input id="brush-color" type="color" value="#000000">
+                    <input id="brush-size" type="range" min="1" max="50" value="10">
+                    <select id="brush-type" style="margin-bottom: 10px;">
+                        <option value="Pencil">Молив</option>
+                        <option value="Circle">Кръгла четка</option>
+                        <option value="Spray">Спрей</option>
+                        <option value="PatternBrush">Четка с шаблон</option>
+                    </select>
+                    <button class="upload-button-sidebar-left" id="toggle-eraser">Гума</button>
+                    <button class="upload-button-sidebar-left" id="color-picker-button">Color Picker</button>
+                    <button class="upload-button-sidebar-left" id="clear-drawing">Изчисти рисунката</button>
+                </div>
+                <div>
+                    <p class="centered-text">Add text:</p>
+                    <label for="font-size-label"></label>
+                    <input class="text-button" type="number" id="font-size-label" value="20" min="1" max="100">
+                    <br>
+                    <button class="text-button" id="add-text-button">Add Text</button>
+                    <label for="font-color-label"></label>
+                    <input class="text-button" type="color" id="font-color-label" value="#000000">
+                    <br>
+                    <button class="text-button" id="toggle-bold">Bold</button>
+                    <button class="text-button" id="toggle-italic">Italic</button>
+                    <select class="text-button" id="font-family-button">
+                        <option value="Arial">Arial</option>
+                        <option value="Arial Black">Arial Black</option>
+                        <option value="Arial Narrow">Arial Narrow</option>
+                        <option value="Arial Rounded MT Bold">Arial Rounded MT Bold</option>
+                        <option value="Arial Unicode MS">Arial Unicode MS</option>
+                        <option value="Baskerville Old Face">Baskerville Old Face</option>
+                        <option value="Berlin Sans FB">Berlin Sans FB</option>
+                        <option value="Berlin Sans FB Demi">Berlin Sans FB Demi</option>
+                        <option value="Bernard MT Condensed">Bernard MT Condensed</option>
+                        <option value="Blackadder ITC">Blackadder ITC</option>
+                        <option value="Bodoni MT">Bodoni MT</option>
+                        <option value="Book Antiqua">Book Antiqua</option>
+                        <option value="Bookman Old Style">Bookman Old Style</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Lucida Console">Lucida Console</option>
+                        <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                        <option value="MS Sans Serif">MS Sans Serif</option>
+                        <option value="MS Serif">MS Serif</option>
+                        <option value="Palatino Linotype">Palatino Linotype</option>
+                        <option value="Symbol">Symbol</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Webdings">Webdings</option>
+                        <option value="Wingdings">Wingdings</option>
+                        <option value="Wingdings 2">Wingdings 2</option>
+                        <option value="Wingdings 3">Wingdings 3</option>
+                    </select>
+                    <button class="text-button" id="align-left">Left</button>
+                    <button class="text-button" id="align-center">Center</button>
+                    <button class="text-button" id="align-right">Right</button>
+                </div>
+
+                <!-- <div id="cart">
+                    <p class="centered-text">Cart:</p>
+                    <div id="cart-items">
+                        <p class="centered-text">No items in cart</p>
+                    </div>
+                    <div id="cart-buttons">
+                        <button class="upload-button-sidebar-left" id="clear-cart">Clear Cart</button>
+                        <button class="upload-button-sidebar-left" id="save-cart">Save Cart</button>
+                        <button class="upload-button-sidebar-left" id="load-cart">Load Cart</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div id="spinner" class="ring">
+        Loading
+        <span></span>
+    </div>
+
+
+    <script type="module" src="./main.js"></script>
+    <script src="./fabric.min.js"></script>
+    <script src="./jspdf.min.js"></script>
+    <script>
+        function loadProject() {
+            window.location.href = 'https://localhost:44338/CanvasMvc';
+        }
+    </script>
+    <script src="~/js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="~/Carousel/js/jquery-ui.min.js"></script>
+    <script src="~/Carousel/js/showhide.js"></script>
+    <script src="~/Carousel/js/jquery.mousewheel.js"></script>
+    <script src="~/Carousel/js/ddsmoothmenu.js"></script>
+    <script src="~/Carousel/js/advCarousel.js"></script>
+    <script src="~/Carousel/js/cloud-carousel.1.0.5.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/html2canvas.min.js"></script>
+    <script src="~/Original_WorkVersion/fabric.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/lazy.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
+    <script src="~/js/Chat_JS/globalChat.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!--@*Пуска изпълнението на спинера - работи докато не се спре със скрипта от Index във /View/CanvasMvc*@-->
+    <script>
+        $(document).ready(function () {
+            $('#save-project').on('click', function () {
+                $('#spinner').show();
+                setTimeout(function () {
+                    window.location.href = $(this).attr('href');
+                }.bind(this), 500);
+                return false;
+            });
+        });
+    </script>
+    <!--<script>
+        $(document).ready(function () {
+            $('#navButtonCarDesigner').on('click', function () {
+                $('#spinner').show();
+                setTimeout(function () {
+                    window.location.href = $(this).attr('href');
+                }.bind(this), 500);
+                return false;
+            });
+        });
+    </script>-->
+
+</body>
+
+</html>

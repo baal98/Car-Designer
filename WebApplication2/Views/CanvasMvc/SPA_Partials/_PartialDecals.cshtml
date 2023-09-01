@@ -1,0 +1,63 @@
+﻿@if (ViewBag.DecalsImageNames != null && ViewBag.DecalsImageNames.Count > 0)
+{
+    <div class="folder">
+        <button class="folder-title">Decals</button>
+        <div class="folder-content">
+            @foreach (var image in ViewBag.DecalsImageNames)
+            {
+                <button class="gallery-button" data-src="@Url.Content("~/images/Gallery/Decals/" + image)">
+                    <img src="@Url.Content("~/images/Gallery/Decals/" + image)" class="preview-img">
+                    <span class="button-text">@image</span>
+                </button>
+            }
+        </div>
+    </div>
+}
+
+@if (ViewBag.BrandsImageNames != null && ViewBag.BrandsImageNames.Count > 0)
+{
+    <div class="folder">
+        <button class="folder-title">Brands</button>
+        <div class="folder-content">
+            @foreach (var image in ViewBag.BrandsImageNames)
+            {
+                <button class="gallery-button" data-src="@Url.Content("~/images/Gallery/Brands/" + image)">
+                    <img src="@Url.Content("~/images/Gallery/Brands/" + image)" class="preview-img">
+                    <span class="button-text">@image</span>
+                </button>
+            }
+        </div>
+    </div>
+}
+
+@if (ViewBag.OffroadImageNames != null && ViewBag.OffroadImageNames.Count > 0)
+{
+    <div class="folder">
+        <button class="folder-title">Offroad</button>
+        <div class="folder-content">
+            @foreach (var image in ViewBag.OffroadImageNames)
+            {
+                <button class="gallery-button" data-src="@Url.Content("~/images/Gallery/Offroad/" + image)">
+                    <img src="@Url.Content("~/images/Gallery/Offroad/" + image)" class="preview-img">
+                    <span class="button-text">@image</span>
+                </button>
+            }
+        </div>
+    </div>
+}
+
+@if (ViewBag.FunnyImageNames != null && ViewBag.FunnyImageNames.Count > 0)
+{
+    <div class="folder">
+        <button class="folder-title">Funny</button>
+        <div class="folder-content">
+            @foreach (var image in ViewBag.FunnyImageNames)
+            {
+                <button class="gallery-button" data-src="@Url.Content("~/images/Gallery/Funny/" + image)">
+                    <img src="@Url.Content("~/images/Gallery/Funny/" + image)" class="preview-img">
+                    <span class="button-text">@image</span>
+                </button>
+            }
+        </div>
+    </div>
+}

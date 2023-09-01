@@ -1,0 +1,80 @@
+﻿@model UserProfileViewModel
+
+@{
+    ViewData["Title"] = "All Orders";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+<style>
+    .background-box {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+</style>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground3.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="col-md-12">
+    <div class="background-box orders-wrapper" style="height: 800px; overflow: auto;">
+
+        @if (Model.Orders != null && Model.Orders.Count > 0)
+        {
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Order Total</th>
+                        <th>Order Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                            <td>@order.OrderTotal.ToString("F2")</td>
+                            <td>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in order.OrderDetails)
+                                        {
+                                            <tr>
+                                                <td>@item.Product.Id</td>
+                                                <td>@item.Product.Title</td>
+                                                <td>@item.Count</td>
+                                                <td>@item.Product.Price.ToString("F2")</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+

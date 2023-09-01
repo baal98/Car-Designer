@@ -1,0 +1,254 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+    <section class="h-100 gradient-form">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-12">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-5 ">
+                                <div class="card-body p-md-5 mx-md-4">
+                                    <form id="account" method="post">
+                                        <h3>Please login to your account</h3>
+                                        <hr/>
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-outline mb-3">
+                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
+                                            <label asp-for="Input.Email" class="form-label"></label>
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-outline mb-3">
+                                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true"/>
+                                            <label asp-for="Input.Password" class="form-label"></label>
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="text-center pt-1 mb-3 pb-1">
+                                            <div class="form-check">
+                                                <label asp-for="Input.RememberMe" class="form-label">
+                                                    <input class="form-check-input" asp-for="Input.RememberMe"/>
+                                                    <label class="form-check-label" asp-for="Input.RememberMe">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                                                </label>
+                                            </div>
+
+                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
+                                                Log
+                                                in
+                                            </button>
+                                           @* <a class="text-muted" asp-page="./ForgotPassword">Forgot password?</a>*@
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Don't have an account?</p>
+                                            <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" href="./Register?returnUrl=@Model.ReturnUrl">Create new</a>
+                                        </div>
+                                    </form>
+
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <section>
+                                        ... or use your facebook account to login
+                                            @{
+                                                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                                {
+                                                    <div>
+                                                        <p>
+                                                            There are no external authentication services configured. See this
+                                                            <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                                article
+                                                                about setting up this ASP.NET application to support logging in via external services
+                                                            </a>.
+                                                        </p>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                        <div>
+                                                            <p>
+                                                                @foreach (var provider in Model.ExternalLogins!)
+                                                                {
+                                                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </form>
+                                                }
+                                            }
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-7 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white">
+                                    <div class="text-center">
+                                        <h2 class="mt-1 mb-2 pb-1"><strong>We are The MILLENIUM Team</strong></h2>
+                                        <img src="~/Images/lotus.webp"
+                                             style="width: 185px;" alt="logo">
+                                        <h3>We are more than just a company</h3>
+                                    </div>
+                                <p class="text-lg-start mt-3" style="margin-left: 20px; margin-right: 20px; font-size: 15px">
+                                        Welcome to Millenium Wrap, where creativity meets innovation. We are more than just a company - we are a community of designers, artists, and enthusiasts who share a passion for transforming ordinary vehicles into extraordinary works of art. Our state-of-the-art tools allow you to design custom stickers for branding cars and transportation vehicles, making your brand stand out on the road.
+                                    </p>
+
+                                <p class="text-lg-start mt-3" style="margin-left: 20px; margin-right: 20px; font-size: 15px">
+                                        At Millenium Wrap, we believe in the power of personalization. Whether you are a business looking to enhance your brand's visibility or an individual seeking a unique way to express yourself, our platform offers endless possibilities. Our team of skilled professionals is here to guide you through the creative process, ensuring your vision comes to life exactly as you imagined.
+                                    </p>
+
+                                <p class="text-lg-start mt-3" style="margin-left: 20px; margin-right: 20px; font-size: 15px">
+                                        Join us today and explore a world where creativity knows no bounds. Take advantage of our user-friendly design interface, extensive library of graphics, and top-notch customer support. Collaborate with other like-minded individuals in our community and share your creations. Together, we can drive your brand to new heights and redefine the way the world sees transportation branding.
+                                    </p>
+
+                                <p class="text-lg-start mt-3" style="margin-left: 20px; margin-right: 20px; font-size: 15px">
+                                        Let's turn every journey into a statement. Let's turn every road into a canvas. Let's turn every ride into a masterpiece. Your adventure with Millenium Wrap starts here. Sign up now and unleash your creativity!
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+                                        
+                                        
+                                        
+                                        
+ @*                                   @page
+@model AdvertisingAgency.Web.Areas.Identity.Pages.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<body style="background-color: #3b3939;">
+    <section class="h-100 gradient-form">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <img src="~/Images/lotus.webp"
+                                             style="width: 185px;" alt="logo">
+                                        <h4 class="mt-1 mb-5 pb-1">We are The MILLENIUM Team</h4>
+                                    </div>
+                                    <form id="account" method="post">
+                                        <h3>Please login to your account</h3>
+                                        <hr />
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-outline mb-4">
+                                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                                            <label asp-for="Input.Email" class="form-label"></label>
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                                            <label asp-for="Input.Password" class="form-label"></label>
+                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="text-center pt-1 mb-5 pb-1">
+                                            <div class="form-check">
+                                                <label asp-for="Input.RememberMe" class="form-label">
+                                                <input class="form-check-input" asp-for="Input.RememberMe"/>
+                                                <label class="form-check-label" asp-for="Input.RememberMe">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                                                </label>
+                                            </div>
+
+                                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">
+                                                Log
+                                                in
+                                            </button>
+                                            <a class="text-muted" asp-page="./ForgotPassword">Forgot password?</a>
+                                        </div>
+
+                                        <div class="d-flex align-items-center justify-content-center pb-4">
+                                            <p class="mb-0 me-2">Don't have an account?</p>
+                                            <a class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" href="./Register?returnUrl=@Model.ReturnUrl">Create new</a>
+                                        </div>
+                                    </form>
+
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <section>
+                                            <h4>... or use another service to log in.</h4>
+                                            <hr />
+                                            @{
+                                                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                                {
+                                                    <div>
+                                                        <p>
+                                                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                                article
+                                                                about setting up this ASP.NET application to support logging in via external services
+                                                            </a>.
+                                                        </p>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                        <div>
+                                                            <p>
+                                                                @foreach (var provider in Model.ExternalLogins!)
+                                                                {
+                                                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                                                }
+                                                            </p>
+                                                        </div>
+                                                    </form>
+                                                }
+                                            }
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <h4 class="mb-4">We are more than just a company</h4>
+                                    <p class="text-center mt-3">
+                                        Welcome to Millenium Wrap, where creativity meets innovation. We are more than just a company - we are a community of designers, artists, and enthusiasts who share a passion for transforming ordinary vehicles into extraordinary works of art. Our state-of-the-art tools allow you to design custom stickers for branding cars and transportation vehicles, making your brand stand out on the road.
+                                    </p>
+
+                                    <p class="text-center">
+                                        At Millenium Wrap, we believe in the power of personalization. Whether you are a business looking to enhance your brand's visibility or an individual seeking a unique way to express yourself, our platform offers endless possibilities. Our team of skilled professionals is here to guide you through the creative process, ensuring your vision comes to life exactly as you imagined.
+                                    </p>
+
+                                    <p class="text-center">
+                                        Join us today and explore a world where creativity knows no bounds. Take advantage of our user-friendly design interface, extensive library of graphics, and top-notch customer support. Collaborate with other like-minded individuals in our community and share your creations. Together, we can drive your brand to new heights and redefine the way the world sees transportation branding.
+                                    </p>
+
+                                    <p class="text-center">
+                                        Let's turn every journey into a statement. Let's turn every road into a canvas. Let's turn every ride into a masterpiece. Your adventure with Millenium Wrap starts here. Sign up now and unleash your creativity!
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@

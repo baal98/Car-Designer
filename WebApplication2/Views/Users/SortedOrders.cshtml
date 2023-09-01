@@ -1,0 +1,197 @@
+﻿@model List<UserOrdersViewModel>
+
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+<style>
+    .background-box {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    .panel-title {
+        font-family: 'RocknRollOne-Regular', sans-serif;
+        font-size: 60px;
+        text-align: center;
+        color: #050997;
+        text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+        -webkit-text-stroke: 1px #5156FC;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground3.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1 class="panel-title">@ViewData["Title"]</h1>
+
+<div class="col-md-12">
+    @using (Html.BeginForm("SortedOrders", "Users", FormMethod.Get, new { id = "filterForm" }))
+    {
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="mb-3">
+                    <label class="form-label-add-edit">Start date:</label>
+                    <input id="startDate" name="startDate" class="form-control" type="date" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="mb-3">
+                    <label class="form-label-add-edit">End date:</label>
+                    <input id="endDate" name="endDate" class="form-control" type="date" />
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="mb-3">
+                    <label class="form-label-add-edit invisible">Button</label>
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="mb-3">
+                    <label class="form-label-add-edit invisible">Button</label>
+                    <a class="btn btn-secondary w-100" style="color: #FFCD24" asp-controller="Users" asp-action="AllOrders">All Orders</a>
+                </div>
+            </div>
+        </div>
+    }
+    @foreach (var userOrder in Model)
+    {
+        <div class="background-box orders-wrapper" style="overflow: auto;">
+            <h3>Orders for @userOrder.FriendlyName</h3>
+
+            @foreach (var order in userOrder.Orders)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Order ID</th>
+                            <th class="text-center">Order Date</th>
+                            <th class="text-center">Order Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">@order.OrderId</td>
+                            <td class="text-center">@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                            <td class="text-center">@order.OrderTotal.ToString("F2")</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Product ID</th>
+                            <th class="text-center">Product Name</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Order Preview</th>
+                            <th class="text-center">Download Order</th>
+                            <th class="text-center">Address Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in order.OrderDetails)
+                        {
+                            <tr>
+                                <td class="text-center">@item.ProductId</td>
+                                <td class="text-center">@item.ProductTitle</td>
+                                <td class="text-center">@item.Quantity</td>
+                                <td class="text-center">@item.Price.ToString("F2")</td>
+                                <td class="text-center">
+                                    <img src="@item.Thumbnail" alt="Order Preview" style="width: 150px; height: 100px;">
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-success" style="color: #FFCD24" asp-controller="Users" asp-action="DownloadOrder" asp-route-id="@userOrder.User.Id" asp-route-canvasId="@item.CanvasId">Download</a>
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userAddressModal-@userOrder.User.Id">Address</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            <!-- Modal -->
+            <div class="modal fade" id="userAddressModal-@userOrder.User.Id" tabindex="-1" aria-labelledby="userAddressModalLabel-@userOrder.User.Id" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="userAddressModalLabel-@userOrder.User.Id">Address Information for @userOrder.User.FriendlyName</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <tr>
+                                    <th>Name:</th>
+                                    <td>@userOrder.User.FriendlyName</td>
+                                </tr>
+                                <tr>
+                                    <th>E-mail:</th>
+                                    <td>@userOrder.User.Email</td>
+                                </tr>
+                                <tr>
+                                    <th>Address:</th>
+                                    <td>@userOrder.User.Address.BuildingNumber, @userOrder.User.Address.Street str., @userOrder.User.City.Name, @userOrder.User.Country.Name</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number:</th>
+                                    <td>@userOrder.User.PhoneNumber</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    }
+
+</div>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/MVC CSS_JS/ScriptsSearch.js"></script>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Ooops!',
+            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <p>@TempData["ErrorMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+};
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            html: '<img src="@Url.Content("~/Images/smyleSuccess.png")" /> <p>@TempData["SuccessMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}

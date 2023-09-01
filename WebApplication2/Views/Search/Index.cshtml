@@ -1,0 +1,150 @@
+﻿@using System.Security.Claims
+@using System.Text.RegularExpressions
+@using System.Web
+@using Microsoft.AspNetCore.Html
+@model IEnumerable<ProjectSearchViewModel>
+
+@{
+    ViewData["Title"] = "Shared Projects";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+
+<style>
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-fixed-size {
+        width: 67px;
+        height: 30px;
+        white-space: normal;
+        white-space: normal;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: rgba(255,255,255,0.8) !important;
+        border: none;
+    }
+
+    .modal-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-dialog {
+        max-width: 50% !important;
+    }
+</style>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/SearchBackground.gif")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div style="display: flex; align-items: center;">
+    <h1 style="font-weight: bold; font-family: initial; color: #ffd600; margin: 0;"> 
+        @if(Model.Count() > 0)
+        {
+            <span style="margin-left: 20px; font-size: 20px; font-family: cursive; color: #ffd600;">Search Results:</span>
+            <span style="font-size: 40px; font-family: monospace; color: #ffd600;">@Model.Count() projects were found</span>
+        }
+    </h1>
+</div>
+
+    <div class="row">
+        @foreach (var project in Model)
+        {
+            <div class="col-md-3">
+                <div class="card mb-2 rounded shadow-sm">
+                    <img class="card-img-top" style="cursor:pointer; width:100%; height: auto; margin-left: 6px; margin-top: 6px" src="@project.Thumbnail" alt="Canvas Thumbnail">
+                    <div class="card-body">
+                        <h5 class="card-title">@project.Name</h5>
+                        <p style="font-size: 8px; font-family: cursive">created by @project.Username</p>
+                    <p class="card-text">@Html.Encode(GetShortDescription(project.Canvas?.Description))</p>
+                        <div>
+                            <div class="button-container">
+                                <form action="/Project/shared-projects-details" method="get">
+                                    <input type="hidden" name="id" value="@project.Id" />
+                                    <button type="submit" class="btn btn-primary btn-sm">Details</button>
+                                </form>
+                                @if (User.FindFirstValue(ClaimTypes.NameIdentifier) != project.UserId.ToString())
+                                {
+                                    <form action="/Project/add-to-my-collection" method="post">
+                                        <input type="hidden" name="CanvasId" value="@project.Id" />
+                                        <button type="submit" class="btn btn-success btn-sm">Get It</button>
+                                    </form>
+                                }
+                            </div>
+                            <small class="text-muted">Created on @project.CreatedOn.ToString("d MMM yyyy")</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body d-flex justify-content-center">
+                <img id="modalImage" src="" class="img-fluid w-100" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    public HtmlString GetShortDescription(string description, int maxLength = 29)
+    {
+        if (string.IsNullOrEmpty(description))
+            return new HtmlString("<span class='text-danger'>No description available.</span>");
+
+    // Remove HTML tags
+        var regex = new Regex("<.*?>", RegexOptions.Multiline);
+        var plainTextDescription = regex.Replace(description, "");
+
+        if (plainTextDescription.Length <= maxLength) return new HtmlString(HttpUtility.HtmlEncode(description));
+
+        var shortDesc = plainTextDescription.Substring(0, maxLength);
+        return new HtmlString(HttpUtility.HtmlEncode(shortDesc + "..."));
+    }
+}
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/UsersCss/ScriptsSearch.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var count = @Model.Count();
+
+        if (count > 0) {
+            Swal.fire({
+                title: 'Search Results',
+                html: `<p>We found ${count} result(s) for your search.</p>`,
+                confirmButtonText: 'Okay'
+            });
+        } else {
+            Swal.fire({
+                title: 'No Results',
+                html: '<p>No results were found.</p>',
+                confirmButtonText: 'Go Back'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("SharedProjects", "Project")';
+                }
+            });
+        }
+    });
+</script>

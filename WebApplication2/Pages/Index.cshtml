@@ -1,0 +1,14 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    ViewData["BodyClass"] = "canvas-body";
+}
+
+<style>
+    .canvas-body nav.navbar {
+        background-color: #000000;
+        height: 60px;
+    }
+</style>
+@Html.Partial("HomePage")

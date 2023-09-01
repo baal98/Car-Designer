@@ -1,0 +1,226 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SPAView";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/CreateStyles.css">
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/main_styles.css">
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/body_styles.css">
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/ruller_styles.css">
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/galleryStyles.css">
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/buttonStyles.css">
+<link rel="stylesheet" href="~/Original_WorkVersion/CSS/FolderButtonStyles.css">
+<link rel="stylesheet" href="~/css/spinner.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground3.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div id="wrapper">
+    <div id="sidebar-left">
+        <div id="gallery">
+            <p class="centered-text">Gallery</p>
+            <div>
+                <input type="radio" id="fill-radio" name="color-mode" value="fill" checked>
+                <label for="fill-radio">Fill</label>
+                <input type="radio" id="outline-radio" name="color-mode" value="outline">
+                <label for="outline-radio">Outline</label>
+            </div>
+            <div>
+                <input class="color-picker" type="color" id="colorPicker" value="#000000"/>
+                <input class="color-outline" type="number" id="stroke-width" min="0" value="0">
+
+                <button class="btn-primary" style="margin-bottom: 5px" id="transparent-svg">Transparant SVG</button>
+            </div>
+            <div id="objects">
+                <div class="folder">
+
+                    <partial name="SPA_Partials/_PartialDecals"/>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+        <h1 id="header-h1">Enjoy & Fun</h1>
+        <div id="canvas-container">
+            <canvas id="canvas" width="1120" height="620"></canvas>
+
+            <div id="object-info">
+                <p>Object Width: <span id="object-width"></span></p>
+                <p>Object Height: <span id="object-height"></span></p>
+                <p>Object Area: <span id="object-area"></span></p>
+                <p>Object Price: $<span id="object-price"></span></p>
+            </div>
+            <div id="middle-number-container">
+                <canvas id="number" width="600" height="70"></canvas>
+            </div>
+            <div id="number-container">
+                <canvas id="middle-number" width="600" height="70"></canvas>
+            </div>
+            <div id="ruler-container">
+                <canvas id="ruler" width="1120" height="30"></canvas>
+            </div>
+        </div>
+
+        <partial name="SPA_Partials/_PartialInstructions"/>
+
+        <div id="text-controls" style="display: flex; flex-wrap: nowrap; align-items: center;">
+            <button class="upload-button-sidebar-left" id="toggle-instructions">Instructions</button>
+            <button class="upload-button-sidebar-left" id="undo">Undo</button>
+            <button class="upload-button-sidebar-left" id="redo">Redo</button>
+            <input class="upload-button-sidebar-left" type="file" id="base-image-input" accept="image/*" style="display: none;"/>
+            <label for="base-image-input" class="upload-button-sidebar-left">Background</label>
+
+            <input type="file" id="upload-image" accept="image/*" style="display: none;">
+            <label for="upload-image" class="upload-button-sidebar-left">Your logo</label>
+            <button class="upload-button-sidebar-left" id="exportPDFButton">Save to PDF</button>
+            <button class="upload-button-sidebar-left" id="exportJPEGButton">Save to JPEG</button>
+            <button class="upload-button-sidebar-left" id="save-project">Save Project</button>
+        </div>
+    </div>
+    <div id="sidebar-right">
+        <div id="price-options">
+            <p class="centered-text">Material:</p>
+            <input type="radio" id="ordinary-foil" name="price" value="1" checked>Ordinary foil
+            <input type="radio" id="auto-foil" name="price" value="2"> Auto foil
+            <div id="price-info">
+                <p class="centered-text">Info:<span id="all-objects-price"></span></p>
+                <p>Total Area: <span id="total-area">0</span> m2</p>
+                <p>Total Price: $<span id="total-price">0</span></p>
+                <p>Total Objects: <span id="all-objects-area">0</span></p>
+            </div>
+            <div>
+                <button class="upload-button-sidebar-left" id="toggle-drawing-mode">Painting</button>
+                <input id="brush-color" type="color" value="#000000">
+                <input id="brush-size" type="range" min="1" max="50" value="10">
+                <select id="brush-type" style="margin-bottom: 10px;">
+                    <option value="Pencil">Pencil</option>
+                    <option value="Circle">Round Brush</option>
+                    <option value="Spray">Spray</option>
+                    <option value="PatternBrush">Pattern Brush</option>
+                </select>
+                <button class="upload-button-sidebar-left" id="toggle-eraser">Eraser</button>
+                <button class="upload-button-sidebar-left" id="color-picker-button">Color Picker</button>
+                <button class="upload-button-sidebar-left" id="clear-drawing">Clear</button>
+            </div>
+            <div>
+                <button class="text-button" id="add-text-button">Add Text</button>
+                <label for="font-color-label"></label>
+                <input class="text-button" type="color" id="font-color-label" value="#000000">
+
+                <partial name="SPA_Partials/_PartialFonts"/>
+
+                <button class="text-button" id="toggle-bold">Bold</button>
+                <button class="text-button" id="toggle-italic">Italic</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="module" src="~/SPA_FreeUSE/main.js"></script>
+    <script src="~/SPA_FreeUSE/jspdf.min.js"></script>
+    <script src="~/js/code.jquery.com_jquery-3.7.0.js"></script>
+    <script src="~/Carousel/js/jquery-ui.min.js"></script>
+    <script src="~/Carousel/js/showhide.js"></script>
+    <script src="~/Carousel/js/jquery.mousewheel.js"></script>
+    <script src="~/Carousel/js/ddsmoothmenu.js"></script>
+    <script src="~/Carousel/js/advCarousel.js"></script>
+    <script src="~/Carousel/js/cloud-carousel.1.0.5.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/html2canvas.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/js/lazy.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
+    <script src="~/js/Chat_JS/globalChat.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="module">
+        //import { createNewSVGObject } from './commonfunctionality.js';
+        import { createNewSVGObject } from '@Url.Content("~/SPA_FreeUSE/commonfunctionality.js")';
+
+        $(document).ready(function () {
+            // Зареждане на CSS стиловете
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/Original_WorkVersion/CSS/buttonStyles.css';
+            link.onload = function () {
+                // След като CSS файлът е зареден, изпълняваме кода, който добавя новите елементи
+                var folderContent = $('.folder-content');
+                
+
+                // След като бутоните от галерият са добавени, слушаме за клик върху тях
+                folderContent.on('click', '.gallery-button', function () {
+                    var src = $(this).attr('data-src'); // Извличане на src от атрибута data-src на бутона
+                    var filename = $(this).find('.button-text').text(); // Извличане на името на файла от текста на бутона
+                    createNewSVGObject(src, filename);
+                });
+            };
+            document.head.appendChild(link);
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.folder-content').hide();
+            $('.folder-title').click(function () {
+                $(this).parent().toggleClass('open');
+                $(this).next('.folder-content').slideToggle();
+            });
+        });
+
+    </script>
+    
+    <script>
+        document.getElementById('save-project').addEventListener('click', function() {
+            Swal.fire({
+                title: 'Sign up!',
+                html: '<img src="@Url.Content("~/Images/smyleSuccess.png")" /> <br/> <p>To use this and many other functionalities - sign up!</p>',
+                confirmButtonText: 'OK',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            });
+        });
+    </script>
+
+    @*<script type="module">
+        //import { createNewSVGObject } from './commonfunctionality.js';
+        import { createNewSVGObject } from '/SPA_FreeUSE/commonfunctionality.js';
+
+        $(document).ready(function () {
+            // Зареждане на CSS стиловете
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/Original_WorkVersion/CSS/buttonStyles.css';
+            link.onload = function () {
+                // След като CSS файлът е зареден, изпълняваме кода, който добавя новите елементи
+                var folderContent = $('.folder-content');
+                
+
+                // След като бутоните от галерият са добавени, слушаме за клик върху тях
+                folderContent.on('click', '.gallery-button', function () {
+                    var src = $(this).attr('data-src'); // Извличане на src от атрибута data-src на бутона
+                    var filename = $(this).find('.button-text').text(); // Извличане на името на файла от текста на бутона
+                    createNewSVGObject(src, filename);
+                });
+            };
+            document.head.appendChild(link);
+        });
+
+    </script>*@
+}

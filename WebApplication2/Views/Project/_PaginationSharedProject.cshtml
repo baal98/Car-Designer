@@ -1,0 +1,27 @@
+﻿@model PaginatedList<SharedProjectViewModel>
+
+<div class="pagination">
+    @if (Model.HasPreviousPage)
+    {
+        <a href="@Url.Action("shared-projects", "Project", new { page = Model.PageIndex - 1 })">Previous</a>
+    }
+
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.PageIndex)
+        {
+            <span class="current-page">@i</span>
+        }
+        else
+        {
+            <a href="@Url.Action("shared-projects", "Project", new { page = i })">@i</a>
+        }
+    }
+
+    @if (Model.HasNextPage)
+    {
+        <a href="@Url.Action("shared-projects", "Project", new { page = Model.PageIndex + 1 })">Next</a>
+    }
+</div>
+
+

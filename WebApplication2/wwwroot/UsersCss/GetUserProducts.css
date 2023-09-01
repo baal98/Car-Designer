@@ -1,0 +1,45 @@
+﻿.panel-title {
+    font-family: 'Pacifico Regular', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    color: #050997;
+    text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+    -webkit-text-stroke: 1px #5156FC;
+}
+
+.background-box {
+    background: rgba(55, 255, 255, 0.7); /* Бял фон с 80% прозрачност */
+    border-radius: 15px; /* Заоблени ъгли */
+    padding: 20px; /* Място около съдържанието в кутията */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-fixed-size {
+    width: 67px;
+    height: 30px;
+    white-space: normal;
+    white-space: normal;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(255,255,255,0.8) !important; /* Бял фон с 80% прозрачност */
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 50% !important;
+}

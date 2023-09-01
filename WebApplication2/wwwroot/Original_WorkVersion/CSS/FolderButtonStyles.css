@@ -1,0 +1,94 @@
+.navbar-fullwidth {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.folder {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1496D0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    position: relative;
+    width: 162px;
+}
+
+.folder-title {
+    font-weight: bold;
+    cursor: pointer;
+    background-color: darkblue;
+    color: white;
+    padding: 0px;
+    border-radius: 5px;
+    position: relative;
+    width: 160px;
+    height: 30px;
+}
+
+.folder-title::after {
+    content: '▼';
+    font-size: 0.8em;
+    position: absolute;
+    right: 10px;
+    bottom: -5px;
+    transition: transform 0.3s ease;
+}
+
+.folder.open .folder-title::after {
+    transform: rotate(-180deg);
+}
+
+.folder-content {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 210%; /*Променя ширината на полето на елементите спрямо папката в % */
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+    overflow-y: auto; /*Добавяме на вертикален скролер */
+    overflow-x: hidden; /*Скриване на хоризонталния скролер */
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 1000;
+    max-height: 300px;
+}
+
+.gallery-button {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 50px;
+    position: relative;
+}
+
+.preview-img {
+    width: 120%;
+    height: 120%;
+    object-fit: contain;
+}
+
+.button-text {
+    font-size: 0.6em;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-button:hover .button-text {
+    transform: translateY(0);
+}

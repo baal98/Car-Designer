@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Canvas
+@{
+    ViewData["Title"] = "Delete";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/DeleteStyles.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/BMVDeleteBackGround.gif")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<hr />
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-xl-10">
+        <div>
+            <div class="row g-0">
+                <div class="col-lg-6 align-items-center gradient-custom-2" id="transform3D_1" style="background-image: url('@Url.Content("~/Images/DeleteImageBackground.jpg")'); background-size: cover; background-position: center;">
+                    <div style="background-image: url('@Model.Thumbnail'); background-size: 20px 20px; background-position: center; background-repeat: no-repeat;">
+                        <div class="text-white px-3 py-4 p-md-2 mx-md-1">
+                            <p class="mb-4 animated-text">
+                                Are you sure you want to erase your creation? Remember, there's no turning back once it's gone. Think about all the effort and imagination you poured into it. But if you're sure, we respect your decision. Proceed with caution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center" style="z-index: -3">
+                        <img class="rotate-slowly" src="~/Images/WRAP LOGO MILLENIUM.png"
+                             style="width: 280px;" alt="logo">
+                    </div>
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center">
+                            <img id="transform3D_2" src="@Model.Thumbnail"
+                                 style="width: 360px; margin-bottom: 20px" alt="logo">
+                        </div>
+                        <h3 class="h3-custom-font" style="margin-top: 0px; text-align: center; color: gainsboro">You are about to delete your project: <span style="color: burlywood; font-size: 30px">@Model.Name</span></h3>
+                        <form asp-action="Delete" id="deleteForm">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="form-group d-flex justify-content-center">
+                                <input type="submit" value="Delete" class="btn btn-danger" /> |
+                                <a asp-action="Index" class="btn btn-success">Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@Html.Partial("Partials/_DeletePartial")

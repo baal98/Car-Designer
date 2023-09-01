@@ -1,0 +1,116 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Phone number";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+    ViewData["BodyClass"] = "canvas-body";
+}
+
+<style>
+    .canvas-body {
+        background-color: navajowhite;
+    }
+
+        .canvas-body nav.navbar {
+            background-color: cornflowerblue;
+        }
+</style>
+
+<h3>
+    @ViewData["Title"]
+    @if (Model.IsPhoneNumberConfirmed)
+    {
+        @: (@Model.Input.PhoneNumber)
+    }
+</h3>
+
+<partial name="_StatusMessage" for="StatusMessage" />
+@if (Model.IsPhoneNumberConfirmed)
+{
+    <div>Phone number is confirmed.</div>
+}
+else
+{
+    <div>Phone number is not confirmed.</div>
+}
+<div style="font-size: 15px">Required format is +XXX...</div>
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.PhoneNumber" class="form-control"/>
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            @if (Model.CodeSent)
+            {
+                <div class="form-floating">
+                    <input asp-for="Input.Code" class="form-control" />
+                    <label asp-for="Input.Code" class="form-label"></label>
+                    <span asp-validation-for="Input.Code" class="text-danger"></span>
+                </div>
+            }
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">
+                @if (Model.CodeSent)
+                {
+                    <span>Verify</span>
+                }
+                else
+                {
+                    <span>Send Code</span>
+                }
+            </button>
+
+            @if (Model.IsPhoneNumberConfirmed)
+            {
+                <button id="delete-phone-button" type="submit" formaction="/Identity/Account/Manage/Index?handler=DeletePhoneNumber" class="w-100 btn btn-lg btn-danger" onclick="return confirm('Are you sure you want to delete your phone number?');">Delete Phone Number</button>
+            }
+
+            @if (!Model.CodeSent && ViewData.ModelState.ContainsKey("Input.Code"))
+            {
+                <div class="text-danger">
+                    @ViewData.ModelState["Input.Code"]?.Errors[0].ErrorMessage
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var error = '@TempData["ShoppingCartError"]';
+            if (error && error.length > 0) {
+                Swal.fire({
+                    title: 'Please, fill in the required fields!',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                })
+            }
+        });
+
+            $(document).ready(function () {
+                var error = '@TempData["Error"]';
+                if (error && error.length > 0) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: error,
+                        icon: 'error',
+                        showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                        }
+                    });
+                }
+            });
+    </script>
+}

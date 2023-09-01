@@ -1,0 +1,225 @@
+/*стилове на бутона за добавяне на картинка от потребителя */
+.upload-button {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    user-select: none;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .upload-button:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .upload-button:active {
+    background-color: #0056b3;
+    border-color: #004085;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  }
+  
+
+  /*стилове на бутоните за добавяне на картинка от потребителя */
+.upload-button-sidebar-left {
+    width: 120px;
+  margin-bottom: 5px;
+  /* display: inline-block; */
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #6e3737;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  user-select: none;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.upload-button-sidebar-left:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.upload-button-sidebar-left:active {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px;
+}
+
+.control-group:last-child {
+    margin-right: 0;
+}
+
+#text-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+
+/*стилове на бутона за добавяне на текст от потребителя. Така ширината на всички бутони ще бъде еднаква, а текстът, който не се побира в бутона, ще бъде скъсан с добавяне на точки в края на текста. */
+.text-button {
+  margin-bottom: 5px;
+  display: inline-block;
+  width: 80px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #057231;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  user-select: none;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.text-button:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.text-button:active {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+
+/*стилове на бутона за Галерията. Така ширината на всички бутони ще бъде еднаква, а текстът, който не се побира в бутона, ще бъде скъсан с добавяне на точки в края на текста. */
+.gallery-button {
+  margin-bottom: 5px;
+  display: inline-block;
+  width: 70px;
+  padding: 3px 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: antiquewhite;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  user-select: none;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.gallery-button:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.gallery-button:active {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+
+/*стилове на бутона за Color Picker.*/
+.color-picker {
+  margin-bottom: 5px;
+  margin-left: 7px;
+  display: inline-block;
+  width: 60px; 
+  padding: 1px 3px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #840505;
+  border: 1px solid #4b0505;
+  border-radius: 4px;
+  user-select: none;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.color-picker:hover {
+  background-color: #f0139f;
+  border-color: #004085;
+}
+
+.color-picker:active {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+
+/*стилове на бутона за outline на стикерите.*/
+.color-outline {
+  margin-bottom: 5px;
+  margin-left: 7px;
+  display: inline-block;
+  width: 70px;
+  padding: 1px 3px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #840505;
+  border: 1px solid #4b0505;
+  border-radius: 4px;
+  user-select: none;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+.color-outline:hover {
+  background-color: #f0139f;
+  border-color: #004085;
+}
+
+.color-outline:active {
+  background-color: #0056b3;
+  border-color: #004085;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}

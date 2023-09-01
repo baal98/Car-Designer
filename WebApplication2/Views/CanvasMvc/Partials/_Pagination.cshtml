@@ -1,0 +1,23 @@
+﻿<div class="pagination">
+    @if ((int)ViewData["CurrentPage"] > 1)
+    {
+        <a href="@Url.Action("Index", new { page = (int)ViewData["CurrentPage"] - 1 })">Previous</a>
+    }
+
+    @for (int i = 1; i <= (int)ViewData["TotalPages"]; i++)
+    {
+        if (i == (int)ViewData["CurrentPage"])
+        {
+            <span class="current-page">@i</span>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", new { page = i })">@i</a>
+        }
+    }
+
+    @if ((int)ViewData["CurrentPage"] < (int)ViewData["TotalPages"])
+    {
+        <a href="@Url.Action("Index", new { page = (int)ViewData["CurrentPage"] + 1 })">Next</a>
+    }
+</div>

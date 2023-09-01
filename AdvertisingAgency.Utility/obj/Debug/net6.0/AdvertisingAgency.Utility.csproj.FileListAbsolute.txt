@@ -1,0 +1,48 @@
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.deps.json
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.AssemblyReference.cache
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfoInputs.cache
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfo.cs
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.CoreCompileInputs.cache
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\refint\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\July 2023\Advertising-Agency-master\AdvertisingAgency.Utility\obj\Debug\net6.0\ref\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.deps.json
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.AssemblyReference.cache
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfoInputs.cache
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfo.cs
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.CoreCompileInputs.cache
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\refint\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\Advertising Agency\AdvertisingAgency.Utility\obj\Debug\net6.0\ref\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.deps.json
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.AssemblyReference.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfoInputs.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfo.cs
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.CoreCompileInputs.cache
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\refint\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\AdvertisingAgency\AdvertisingAgency.Utility\obj\Debug\net6.0\ref\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.deps.json
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\bin\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.AssemblyReference.cache
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfoInputs.cache
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.AssemblyInfo.cs
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.csproj.CoreCompileInputs.cache
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\refint\AdvertisingAgency.Utility.dll
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\AdvertisingAgency.Utility.pdb
+C:\Exercises\WEB_Projects\July 2023\AdvertisingAgency - 14-07-23\AdvertisingAgency.Utility\obj\Debug\net6.0\ref\AdvertisingAgency.Utility.dll

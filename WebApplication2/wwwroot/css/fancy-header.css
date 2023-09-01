@@ -1,0 +1,63 @@
+﻿/*.fancy-header {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 100px;
+    color: navajowhite;
+    text-shadow: 3px 3px 8px oldlace, 0 0 1em black, 0 0 0.2em black;
+    font-family: 'GreatVibes-Regular', sans-serif;
+}
+
+.fancy-sub-header {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 45px;
+    color: navajowhite;
+    text-shadow: 3px 3px 8px oldlace, 0 0 1em black, 0 0 0.2em black;
+    font-family: 'RocknRollOne-Regular', sans-serif;
+}
+
+@font-face {
+    font-family: 'GreatVibes-Regular';
+    src: url('/fonts/GreatVibes-Regular.ttf') format('woff2'), url('/fonts/GreatVibes-Regular.ttf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}*/
+
+.fancy-header {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 100px;
+    color: navajowhite;
+    font-family: 'GreatVibes-Regular', sans-serif;
+    position: relative;
+    text-shadow: 3px 3px 8px oldlace, 0 0 1em coral, 0 0 0.2em aqua;
+    animation: shadowEffect 2s infinite;
+}
+
+.fancy-sub-header {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 45px;
+    color: navajowhite;
+    font-family: 'RocknRollOne-Regular', sans-serif;
+    position: relative;
+    text-shadow: 3px 3px 8px oldlace, 0 0 1em black, 0 0 0.2em red;
+    animation: shadowEffect 1s infinite;
+}
+
+@keyframes shadowEffect {
+    0%, 100% {
+        text-shadow: 3px 3px 8px oldlace, 0 0 1em black, 0 0 0.2em black;
+    }
+
+    50% {
+        text-shadow: 3px 3px 10px oldlace, 0 0 1.2em black, 0 0 0.4em red;
+    }
+}
+
+@font-face {
+    font-family: 'GreatVibes-Regular';
+    src: url('/fonts/GreatVibes-Regular.ttf') format('woff2'), url('/fonts/GreatVibes-Regular.ttf') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}

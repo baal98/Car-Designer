@@ -1,0 +1,65 @@
+.canvas-body {
+    background-color: navajowhite;
+}
+
+    .canvas-body nav.navbar {
+        background-color: #1A56E7;
+        height: 60px;
+    }
+
+.card {
+    background-color: #B9854E;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body {
+    background-color: #FFD600;
+    text-align: center;
+}
+
+.card-title {
+    background-color: aliceblue;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #98FFF9;
+    color: black;
+}
+
+.btn-danger {
+    background-color: #FF8A89;
+    color: white;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #eee;
+    color: #333;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.pagination .current-page {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.text-danger {
+    color: red;
+}

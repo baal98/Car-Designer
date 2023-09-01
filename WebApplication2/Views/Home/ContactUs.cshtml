@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/R.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1>@ViewData["Title"]</h1>
+
+<p>You can contact us at:</p>
+
+<p>Email: office@milleniumwrap.com</p>
+<p>Phone: +359 879 641776</p>

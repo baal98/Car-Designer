@@ -1,0 +1,102 @@
+﻿@inject JavaScriptEncoder Encoder
+@model CanvasViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/UsersCss/detailsStyles.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-2; background-image: url('@Url.Content("~/Images/ProductDetailsBackGround.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<hr />
+<div class="card container pt-4">
+    <div class="card-header bg-primary text-light ml-0 row">
+        <div class="col-12 col-md-6">
+            <h1 class="text-white-50">@Model.Canvas.Name</h1>
+            <p class="text-warning">by @ViewData["UserEmail"]</p>
+        </div>
+    </div>
+    <div class="card-body row container">
+        <div class="container rounded p-2">
+            <div class="row">
+                <div class="col-8 col-lg-8">
+
+                    <div class="row pl-2">
+                        <h5 class="text-muted">Total Price: @Model.TotalPrice</h5>
+                    </div>
+                    <div class="row pl-2">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Width</th>
+                                    <th>Height</th>
+                                    <th>Fill</th>
+                                    <th>Angle</th>
+                                    <th>FlipX</th>
+                                    <th>FlipY</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var canvasObject in Model.Canvas.Objects)
+                                {
+                                    <tr>
+                                        <td>@canvasObject.Id</td>
+                                        <td>@canvasObject.type</td>
+                                        <td>@canvasObject.name</td>
+                                        <td>@canvasObject.price</td>
+                                        <td>@canvasObject.width</td>
+                                        <td>@canvasObject.height</td>
+                                        <td>@canvasObject.fill</td>
+                                        <td>@canvasObject.angle</td>
+                                        <td>@canvasObject.flipX</td>
+                                        <td>@canvasObject.flipY</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr/>
+                        <div class="d-flex justify-content-center">
+                            <form asp-controller="Users" asp-action="GetUserProductsDetails" method="get">
+                                <input type="hidden" name="userId" value="@Model.Canvas.UserId" />
+                                <input class="btn btn-success btn-fixed-size" type="submit" value="Back to List" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 offset-lg-1 text-center">
+                    <img src="@Model.Thumbnail" alt="@Model.Canvas.Name thumbnail" width="100%" class="rounded" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        @if(!string.IsNullOrEmpty(Model.Description))
+        {
+            <h3>Description:</h3>
+            <div class="row pl-2">
+                <p class="text-secondary">@Html.Encode(Model.Description)</p>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="spinner" class="ring">
+    Loading
+    <span></span>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+

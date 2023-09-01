@@ -1,0 +1,41 @@
+#ruler {
+    top: 577px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100px; /* Височината на оразмерителната линия, променете ако е необходимо */
+    background-color: transparent; /* Фонът на контейнера е прозрачен */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#number {
+    position: absolute;
+    top: 577px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-51.2%);
+    width: 100%;
+    height: 100px; /* Височината на номерата на линията, променете ако е необходимо */
+    background-color: transparent; /* Фонът на контейнера е прозрачен */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+} 
+
+#middle-number {
+  position: absolute;
+  top: 577px; /* Позиция от горния край на канваса */
+  bottom: 0;
+  left: 50.25%;
+  transform: translateX(-51.2%);
+  width: 100%;
+  height: 100px; /* Височината на номерата на линията, променете ако е необходимо */
+  background-color: transparent; /* Фонът на контейнера е прозрачен */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;  
+} 

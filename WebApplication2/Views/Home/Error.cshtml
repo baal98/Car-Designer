@@ -1,0 +1,24 @@
+﻿@model HttpError
+@{
+    ViewData["Title"] = "Error " + Model.StatusCode;
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/MVC CSS_JS/Styles.css">
+<link rel="stylesheet" href="~/ProjectCSS/Styles.css">
+<link rel="stylesheet" href="~/ProjectCSS/SharedProjects.css">
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/Error404.gif")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+<hr />
+<div>
+    <h1 class="panel-title">@Model.Message</h1>
+</div>
+<hr />
+<h3 class="panel-title">Please train again later!</h3>
+

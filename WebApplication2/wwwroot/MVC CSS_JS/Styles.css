@@ -1,0 +1,122 @@
+.canvas-body {
+    background-color: navajowhite;
+}
+
+    .canvas-body nav.navbar {
+        background-color: #1A56E7;
+        height: 60px;
+    }
+
+.card {
+    background-color: #B9854E;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body {
+    background-color: #FFD600;
+    text-align: center;
+}
+
+.card-title {
+    background-color: aliceblue;
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #98FFF9;
+    color: black;
+}
+
+.btn-danger {
+    background-color: #FF8A89;
+    color: white;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #eee;
+    color: #333;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.pagination .current-page {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.text-danger {
+    color: red;
+}
+
+
+/*index styles*/
+.panel-title {
+    margin-bottom: 5px;
+    font-family: 'ZillaSlab-LightItalic', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    text-shadow: 8px 8px 12px rgba(255,255,255,5);
+    font-weight: bold;
+    background: linear-gradient(to right, #1e90ff 50%, #000080 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: gradient 2s linear infinite alternate;
+}
+
+@keyframes gradient {
+     0% {
+         background-position: 100% 0;
+     }
+
+     100% {
+         background-position: 0 0;
+     }
+ }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-fixed-size {
+    width: 67px;
+    height: 30px;
+    white-space: normal;
+    white-space: normal;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(255,255,255,0.8) !important;
+    border: none;
+}
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 50% !important;
+}

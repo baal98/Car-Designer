@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Message>
+@{
+    ViewData["Title"] = "Chat Room";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/css/chat_style.css" asp-append-version="true" />
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-2; background-image: url('@Url.Content("~/Images/ChatBackground1.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<div class="container bootstrap snippets bootdeys">
+    <div class="row">
+        <div class="col-md-4 col-xs-12">
+            <!-- Panel for Old Messages -->
+            <div class="panel" id="oldMessages">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="icon wb-chat-text" aria-hidden="true"></i> Message History
+                    </h3>
+                </div>
+                <div class="panel-body" style="overflow-y: auto; max-height: 500px; background-image: url('@Url.Content("~/Images/ChatWaterBackground.jpg")'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                    <div class="chats" id="historyMessagesList">
+                        @foreach (var message in Model)
+                        {
+                            var chatClass = (message.Username != ViewBag.CurrentUsername) ? "chat chat-left" : "chat";
+                            <div class="@chatClass">
+                                <div class="chat-avatar">
+                                    <a class="avatar avatar-online" data-toggle="tooltip" href="#" data-placement="right" title="" data-original-title="@message.Username">
+                                        <img src="@(string.IsNullOrEmpty(message.UserImageUrl) ? "/images/Profile-Avatar.png" : message.UserImageUrl)" alt="@message.Username">
+                                        <i></i>
+                                    </a>
+                                </div>
+                                <div class="chat-body">
+                                    <div class="chat-content">
+                                        <p><strong>@message.Username: </strong>@message.Text</p>
+                                        <time class="chat-time" datetime="@message.CreatedOn.ToLocalTime()">@message.CreatedOn.ToLocalTime()</time>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- End Panel for Old Messages -->
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <!-- Panel for Current Chat -->
+            <div class="panel" id="chat" style="width: 100%;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="icon wb-chat-text" aria-hidden="true"></i> Messenger
+                    </h3>
+                </div>
+                <div class="panel-body" style="overflow-y: auto; max-height: 500px;">
+                    <div class="panel-body">
+                        <!-- Current Chat Messages -->
+                        <div class="chats messages" id="messagesList" style="overflow-y: auto; max-height: 500px;"></div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <form onsubmit="return false;">
+                        <div class="input-group">
+                            <input id="messageInput" type="text" class="form-control" placeholder="Type a message">
+                            <span class="input-group-btn">
+                                <button id="sendButton" class="btn btn-primary" type="button">SEND</button>
+                            </span>
+                            <span class="input-group-btn">
+                                <button id="refreshButton" class="btn btn-primary" type="button">REFRESH</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- End Panel for Current Chat -->
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ChatScripts" />
+}
+

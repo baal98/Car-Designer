@@ -1,0 +1,149 @@
+﻿@model List<UserOrdersViewModel>
+
+@{
+    ViewData["Title"] = "All Orders";
+    ViewData["BodyClass"] = "canvas-body";
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/UsersCss/Styles.css">
+<style>
+    .background-box {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    .panel-title {
+        font-family: 'RocknRollOne-Regular', sans-serif;
+        font-size: 60px;
+        text-align: center;
+        color: #050997;
+        text-shadow: 4px 4px 8px rgba(0,0,0,0.5);
+        -webkit-text-stroke: 1px #5156FC;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div id="spinner" class="ring" style="z-index: 9999;">
+    Loading
+    <span></span>
+</div>
+
+<div class="background-image-div" style="position:fixed; top:0; left:0; height:100vh; width:100vw; z-index:-1; background-image: url('@Url.Content("~/Images/CarBackground3.jpg")'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+<h1 class="panel-title">@ViewData["Title"]</h1>
+
+<div class="col-md-12">
+    <div class="background-box orders-wrapper" style="height: 800px; overflow: auto;">
+        @if (Model != null && Model.Count > 0)
+        {
+            @foreach (var user in Model)
+            {
+                <h3>Orders for @user.FriendlyName</h3>
+
+                @if (user.Orders != null && user.Orders.Count > 0)
+                {
+                    <table class="table mt-4">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Order Date</th>
+                                <th>Order Total</th>
+                                <th>Order Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in user.Orders)
+                            {
+                                <tr>
+                                    <td>@order.OrderId</td>
+                                    <td>@order.OrderDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@order.OrderTotal.ToString("F2")</td>
+                                    <td>
+                                        @if (order.OrderDetails != null && order.OrderDetails.Count > 0)
+                                        {
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product ID</th>
+                                                        <th>Product Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price</th>
+                                                        <th>Order Preview</th>
+                                                        <th>Download Order</th>
+                                                        <th>Address Info</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in order.OrderDetails)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.ProductId</td>
+                                                            <td>@item.ProductTitle</td>
+                                                            <td>@item.Quantity</td>
+                                                            <td>@item.Price.ToString("F2")</td>
+                                                            <td class="text-center">
+                                                                <img src="@item.Thumbnail" alt="Order Preview" style="width: 150px; height: 100px;">
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a class="btn btn-success" style="color: #FFCD24" asp-controller="Users" asp-action="DownloadOrder" asp-route-id="@user.UserId" asp-route-canvasId="@item.CanvasId">Download</a>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userAddressModal-@user.UserId">Address</button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        }
+    </div>
+</div>
+
+
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/MVC CSS_JS/ScriptsSearch.js"></script>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Ooops!',
+            html: '<img src="@Url.Content("~/Images/Ooops.png")" /> <p>@TempData["ErrorMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Success!',
+            html: '<img src="@Url.Content("~/Images/smyleSuccess.png")" /> <p>@TempData["SuccessMessage"].ToString()</p>',
+            confirmButtonText: 'Okay',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    </script>
+}
